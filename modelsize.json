@@ -1,0 +1,9 @@
+{
+    "modelsize": [
+        784,
+        128,
+        64,
+        10
+    ],
+    "modelsizeLength": 4
+}

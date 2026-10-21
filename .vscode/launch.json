@@ -1,0 +1,52 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run CreateModel",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/CreateModel",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Build CreateModel"
+        },
+        {
+            "name": "Run RunModel",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/RunModel",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "RUSTICL_ENABLE",
+                    "value": "radeonsi"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Build RunModel"
+        },
+        {
+            "name": "Run TrainModel",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/TrainModel",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Build TrainModel"
+        }
+    ]
+}

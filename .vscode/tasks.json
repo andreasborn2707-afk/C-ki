@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build CreateModel",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-g",
+                "${workspaceFolder}/CreateModel.cpp",
+                "-o",
+                "${workspaceFolder}/CreateModel",
+                "-lOpenCL"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Build RunModel",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-g",
+                "${workspaceFolder}/RunModel.cpp",
+                "-o",
+                "${workspaceFolder}/RunModel",
+                "-lOpenCL"
+            ],
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "Build TrainModel",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-g",
+                "${workspaceFolder}/TrainModel.cpp",
+                "-o",
+                "${workspaceFolder}/TrainModel",
+                "-lOpenCL"
+            ],
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+{
+  "runOnStart": true,
+  "updateInterval": 60,
+  "silent": false
+}
