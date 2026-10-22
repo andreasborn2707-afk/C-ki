@@ -396,8 +396,10 @@ int main(){
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         for(int i = modellength - 1; i > 0; i--){
             BiasGradiant, WeightGradiant = train(answer,biase[i],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i]);
-            for
-            biase[i] = biase[i] - (learngradient * BiasGradiant)
+            for(int j = 0; j < modelsize[i + 1]; j++){
+                biase[i][j] = biase[i][j] - (learngradient * BiasGradiant[j])
+            }
+            
         }
     }   
     
