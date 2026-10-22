@@ -104,7 +104,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     cl_mem devbias = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, biasBytes, biase, &err);
     cl_mem devInput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inputBytes, input, &err);
     cl_mem devWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, weightsBytes, flatweights, &err);
-    cl_mem devOutput = clCreateBuffer(context, CL_MEM_WRITE_ONLY , outputBytes, NULL, &err);
+    cl_mem devOutput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, outputBytes, output, &err);
     
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
     err = clSetKernelArg(kernel, 0, sizeof(int), &biaseLength);
