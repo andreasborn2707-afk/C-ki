@@ -362,6 +362,11 @@ int main(){
     for(int i = 0; i < modellength; i++){
         uebergangsarray[i] = new float[modelsize[i]];
     }
+    float* uebergangstraingarray[modellength];
+    //test daten input
+    for(int i = 0; i < modellength; i++){
+        uebergangstrainingarray[i] = new float[modelsize[i]];
+    }
 
     while(Loss > 0.08f){
         //zuerst bestimmen wir welche trainings date wir holen 
@@ -385,7 +390,10 @@ int main(){
         float modelanswer = uebergangsarray[modellength - 1][answer];
         Loss = -1 * (std::log(modelanswer));
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
-
+        
+        for(int i = 0; i < modellength - 1; i++){
+            uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
+        }
     }   
     
 
