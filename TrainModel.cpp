@@ -248,8 +248,9 @@ int main(){
         //zuerst bestimmen wir welche trainings date wir holen 
         int datenzahl = distrib(gen);
         for(int i = 0; i < modelsize[0]; i++){
-            
+            dataset[i] = trainJson[datenzahl]["image"][i].get<int>();
         }
+        
         for(int i = 0; i < modelsize[0]; i++){
             uebergangsarray[0][i] = 0.1f;
         }
