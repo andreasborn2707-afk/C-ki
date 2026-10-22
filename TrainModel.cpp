@@ -83,8 +83,11 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
     size_t biasBytes = sizeof(float) * biaseLength;
     size_t inputBytes = sizeof(float) * inputLength;
+    size_t outputBytes = sizeof(float) * outputsize;
+    size_t inputBytes = sizeof(float) * inputLength;
     size_t weightsBytes = sizeof(float) * biaseLength * inputLength;
     size_t outputBytes = sizeof(float) * biaseLength;
+
 
     float* output = new float[biaseLength];
     //2d weights auf 1d flatten
