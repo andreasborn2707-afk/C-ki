@@ -108,11 +108,11 @@ int main(){
     //einer unserer wichtigsten variablen der loss
     float Loss;
 
-    //das wird einfach immer ein random aus der train json holen
+    
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    // 2. Den gewünschten Bereich definieren [min, max]
+    
     std::uniform_int_distribution<int> distrib(0, 60000);
 
 
@@ -186,6 +186,17 @@ int main(){
             biase[i][j] = biaseJson[i][j];
         }
     }
+    //holt die trainings daten
+    std::ifstream trainingfile ("mnist_.json");
+    if(!trainingfile.is_open()){
+        std::cout << "fehler beim laden der biase json" << std::endl;
+        return 1;
+    }
+    json biaseJson;
+    biasefile >> biaseJson;
+
+
+
     //open cl initialiersieren bei diesem teil bin ich erlich habe ich ai verwendet wie auch um sachen zu importieren
     cl_int err;
     std::vector<cl::Platform> platforms;
