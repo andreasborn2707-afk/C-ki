@@ -63,6 +63,7 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
 cl_context context;
 cl_command_queue queue;
 cl_program program;
+cl_program program1;
 
 float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights){
 
@@ -338,7 +339,9 @@ int main(){
     context = clCreateContext(NULL, 1, &raw_device, NULL, NULL, &err);
     queue = clCreateCommandQueueWithProperties(context, device.get(), 0, &err);
     program = clCreateProgramWithSource(context, 1, &kernelSource, NULL, &err);
+    program1 = clCreateProgramWithSource(context, 1, &kernelBackpropagation, NULL, &err);
     clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
+    clBuildProgram(program1, 0, NULL, NULL, NULL, NULL);
     //vertig initiallieisert 
 
 
