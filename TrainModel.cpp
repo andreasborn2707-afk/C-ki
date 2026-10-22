@@ -402,7 +402,7 @@ int main(){
             for(int j = 0; j < modelsize[i + 1]; j++){
                 for(int k = 0; k < modelsize[i]; k++)
                 {
-                    weights[i][j][k] = weights[i][j][k] - (learngradient * WeightGradiant[(j*modelsize[i])])
+                    weights[i][j][k] = weights[i][j][k] - (learngradient * WeightGradiant[(j*modelsize[i]) + k]);
                 }
             }
             
