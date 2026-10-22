@@ -137,7 +137,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[])
+float* train(int TrueAnswer, float Loss, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[])
 {
      cl_int err;
 
@@ -195,7 +195,7 @@ void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float out
 
     //jetzt das output rauslesen und auf die cpu machen
     err = clEnqueueReadBuffer(queue, devBiasgradiant, CL_TRUE, 0, BiasGradiantBytes, BiasGradiant, 0, NULL, NULL);
-    err = clEnqueueReadBuffer(queue, devOutput, CL_TRUE, 0, outputBytes, output, 0, NULL, NULL);
+    err = clEnqueueReadBuffer(queue, devWeightGradiant, CL_TRUE, 0, WeightGradiantBytes, WeightGradiant, 0, NULL, NULL);
 
     //jetzt noch hinter uns aufrauemen
 
@@ -203,13 +203,15 @@ void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float out
     clReleaseMemObject(devInput);
     clReleaseMemObject(devWeight);
     clReleaseMemObject(devOutput);
+    clReleaseMemObject(devBiasgradiant);
+    clReleaseMemObject(devWeightGradiant);
     clReleaseKernel(kernel);
 
 
 
 
     
-    return output;
+    return BiasGradiant, WeightGradiant;
 
 }
 
