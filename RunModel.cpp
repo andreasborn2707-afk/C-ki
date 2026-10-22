@@ -175,6 +175,8 @@ int main(){
             biase[i][j] = biaseJson[i][j];
         }
     }
+    //jetzt einfach einer der test images holen'
+    
     //open cl initialiersieren bei diesem teil bin ich erlich habe ich ai verwendet wie auch um sachen zu importieren
     cl_int err;
     std::vector<cl::Platform> platforms;
