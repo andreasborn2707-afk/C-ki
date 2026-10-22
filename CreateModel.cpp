@@ -26,7 +26,7 @@ int main(){
     std::random_device rd;
     std::mt19937 gen(rd());
     //bereich festlegen welchen die weights und biases haben sollte es ist eigentlich ziemlich egal sollte halt nur nicht minus sein
-    std::uniform_real_distribution<float> dis(0.0f, 1.0f);
+    std::uniform_real_distribution<float> dis(0.0f, 0.001f);
 
 
     // die oberste array schicht soll so lange sein wie es schichten gibt 
