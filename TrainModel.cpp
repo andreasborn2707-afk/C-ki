@@ -105,6 +105,9 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
 
 
 int main(){
+    //einer unserer wichtigsten variablen der loss
+    float Loss;
+
     //zuerst lesen wir die model groese aus
     std::ifstream file ("modelsize.json");
     if(!file.is_open()){
