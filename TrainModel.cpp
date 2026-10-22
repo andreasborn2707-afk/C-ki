@@ -24,7 +24,7 @@ __kernel void array_add(int biassize, int inputsize, __global const float* Bias,
     }
 }
 )";
-const char* kernelSource = 
+const char* kernelBackpropagation = R"(
 __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs, __global int  inputsize){
     
     int i = get_global_id(0);
@@ -138,6 +138,68 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
 
 void train(float Loss, float biase[], int biaseLength, float output[], int outputLength,float** weights)
 {
+     cl_int err;
+
+    
+
+    
+
+    cl_kernel kernel = clCreateKernel(program, "array_add", &err);
+
+
+    
+    size_t biasBytes = sizeof(float) * biaseLength;
+    size_t inputBytes = sizeof(float) * inputLength;
+    size_t weightsBytes = sizeof(float) * biaseLength * inputLength;
+    size_t outputBytes = sizeof(float) * biaseLength;
+
+    float* output = new float[biaseLength];
+    //2d weights auf 1d flatten
+    float* flatweights = new float[biaseLength * inputLength];
+    for(int i = 0; i < biaseLength; i++){
+        for(int j = 0; j < inputLength; j++)
+        {
+            flatweights[(i * inputLength) + j] = weights[i][j];
+        }
+    }
+
+    //gpu buffers erstellen fuer alle arrays
+    cl_mem devbias = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, biasBytes, biase, &err);
+    cl_mem devInput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inputBytes, input, &err);
+    cl_mem devWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, weightsBytes, flatweights, &err);
+    cl_mem devOutput = clCreateBuffer(context, CL_MEM_WRITE_ONLY , outputBytes, NULL, &err);
+    
+    // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
+    err = clSetKernelArg(kernel, 0, sizeof(int), &biaseLength);
+    err = clSetKernelArg(kernel, 1, sizeof(int), &inputLength);
+    err = clSetKernelArg(kernel, 2, sizeof(cl_mem), &devbias);
+    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devInput);
+    err = clSetKernelArg(kernel, 4, sizeof(cl_mem), &devWeight);
+    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devOutput);
+
+    //jetzt fuehren wir das obere program aus
+    //sagt basicly wie biele thrats gebraucht werden bei uns ist es 1 pro neuron
+    size_t globalWorkSize = biaseLength;
+    err = clEnqueueNDRangeKernel(queue, kernel, 1, NULL, &globalWorkSize, NULL, 0, NULL, NULL);
+
+    clFinish(queue);
+
+    //jetzt das output rauslesen und auf die cpu machen
+    err = clEnqueueReadBuffer(queue, devOutput, CL_TRUE, 0, outputBytes, output, 0, NULL, NULL);
+
+    //jetzt noch hinter uns aufrauemen
+
+    clReleaseMemObject(devbias);
+    clReleaseMemObject(devInput);
+    clReleaseMemObject(devWeight);
+    clReleaseMemObject(devOutput);
+    clReleaseKernel(kernel);
+
+
+
+
+    
+    return output;
 
 }
 
