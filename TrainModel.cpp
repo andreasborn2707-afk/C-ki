@@ -176,8 +176,6 @@ void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float out
     cl_mem devWeightGradiant = clCreateBuffer(context, CL_MEM_WRITE_ONLY , WeightGradiantBytes, NULL, &err);
     
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
-    //int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize
-    err = clSetKernelArg(kernel, 0, sizeof(int), &TrueAnswer);
     err = clSetKernelArg(kernel, 1, sizeof(int), &biaseLength);
     err = clSetKernelArg(kernel, 2, sizeof(int), &outputsize);
     err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devbias);
@@ -185,8 +183,8 @@ void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float out
     err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devWeight);
     err = clSetKernelArg(kernel, 6, sizeof(cl_mem), &devBiasgradiant);
     err = clSetKernelArg(kernel, 7, sizeof(cl_mem), &devWeightGradiant);
-    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devInput);
-    err = clSetKernelArg(kernel, 1, sizeof(int), &inputLength);
+    err = clSetKernelArg(kernel, 8, sizeof(cl_mem), &devInput);
+    err = clSetKernelArg(kernel, 9, sizeof(int), &inputLength);
 
     //jetzt fuehren wir das obere program aus
     //sagt basicly wie biele thrats gebraucht werden bei uns ist es 1 pro neuron
@@ -196,6 +194,7 @@ void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float out
     clFinish(queue);
 
     //jetzt das output rauslesen und auf die cpu machen
+    err = clEnqueueReadBuffer(queue, devBiasgradiant, CL_TRUE, 0, BiasGradiantBytes, BiasGradiant, 0, NULL, NULL);
     err = clEnqueueReadBuffer(queue, devOutput, CL_TRUE, 0, outputBytes, output, 0, NULL, NULL);
 
     //jetzt noch hinter uns aufrauemen
