@@ -24,7 +24,7 @@ __kernel void array_add(int biassize, int inputsize, __global const float* Bias,
     }
 }
 )";
-const char* kernelBackpropagation = R"(
+const char* kernelBackpropagation = 
 __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
     
     int i = get_global_id(0);
