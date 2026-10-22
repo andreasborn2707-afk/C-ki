@@ -34,8 +34,12 @@ __kernel void array_add(int trueAnswere, int biassize, int inputsize, __global c
             error = Input[i] - 1.0f;
         }
         else{
-            error = Input[i]
+            error = Input[i] - 0.0f;
         }
+        for(int j = 0 ; j < biassize; j++){
+            
+        }
+
         
     }
 }
