@@ -184,8 +184,8 @@ int main(){
     //vorherige modelsize wiederherstellen sozusagen
     json datasetJson;
     datasetfile >> datasetJson;
-    int dataset[784] = datasetJson[0];[]
-    std::cout << dataset << std::endl;
+    
+    
     //open cl initialiersieren bei diesem teil bin ich erlich habe ich ai verwendet wie auch um sachen zu importieren
     cl_int err;
     std::vector<cl::Platform> platforms;
