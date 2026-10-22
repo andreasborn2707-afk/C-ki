@@ -184,11 +184,12 @@ int main(){
     //vorherige modelsize wiederherstellen sozusagen
     json datasetJson;
     datasetfile >> datasetJson;
+    
     float* dataset[modelsize[0]];
 
     for(int i = 0; i < modelsize[0]; i++)
     {
-        dataset[i] = datasetJson[0]["image"][0].as<float>();
+        dataset[i] = datasetJson[0]["image"][i];
     }
     
     std::cout << dataset;
