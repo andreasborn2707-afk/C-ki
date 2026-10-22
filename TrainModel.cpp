@@ -152,11 +152,12 @@ void train(float Loss, float biase[], int biaseLength, float output[], int outpu
     size_t biasBytes = sizeof(float) * biaseLength;
     size_t inputBytes = sizeof(float) * inputLength;
     size_t outputBytes = sizeof(float) * outputsize;
-    size_t weightbytes = sizeof(float) * inputLength * biaseLength;
+    size_t weightsbytes = sizeof(float) * inputLength * biaseLength;
     size_t BiasGradiantBytes = sizeof(float) * biaseLength;
     size_t WeightGradiantBytes = sizeof(float) * inputLength * biaseLength;
 
-    float* BiasGradiant = new float[]
+    float* BiasGradiant = new float[biaseLength];
+    float* WeightGradiant = new float[outputsize * biaseLength];
     //2d weights auf 1d flatten
     float* flatweights = new float[biaseLength * inputLength];
     for(int i = 0; i < biaseLength; i++){
@@ -170,6 +171,8 @@ void train(float Loss, float biase[], int biaseLength, float output[], int outpu
     cl_mem devbias = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, biasBytes, biase, &err);
     cl_mem devInput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inputBytes, input, &err);
     cl_mem devWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, weightsBytes, flatweights, &err);
+    cl_mem devOutput = clCreateBuffer(context, CL_MEM_WRITE_ONLY , outputBytes, NULL, &err);
+    cl_mem devOutput = clCreateBuffer(context, CL_MEM_WRITE_ONLY , outputBytes, NULL, &err);
     cl_mem devOutput = clCreateBuffer(context, CL_MEM_WRITE_ONLY , outputBytes, NULL, &err);
     
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
