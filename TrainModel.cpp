@@ -195,7 +195,8 @@ int main(){
     json trainJson;
     trainingfile >> trainJson;
     //wir erstellen einen array den wir immer wieder mit neuen test daten ueberschreiben koenen und einen antwort int
-    
+    int dataset[modelsize[0]];
+    int answer;
 
 
 
@@ -245,6 +246,8 @@ int main(){
 
     while(Loss > 0.08f)
     {
+        //zuerst bestimmen wir welche trainings date wir holen 
+        
         for(int i = 0; i < modelsize[0]; i++){
             uebergangsarray[0][i] = 0.1f;
         }
