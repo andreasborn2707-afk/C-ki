@@ -247,7 +247,7 @@ int main(){
         uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
     }
     for(int i = 0; i < modelsize[modellength - 1]; i++){
-        std::cout << i << " wahrscheinlichkeit:" << uebergangsarray[modellength - 1][i] << '; ';
+        std::cout << i << " wahrscheinlichkeit:" << uebergangsarray[modellength - 1][i] << ", ";
     }
    
 
