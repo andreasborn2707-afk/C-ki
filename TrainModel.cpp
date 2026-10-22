@@ -262,7 +262,7 @@ int main(){
         for(int i = 0; i < modelsize[modellength - 1]; i++){
             std::cout << uebergangsarray[modellength - 1][i] << ' ';
         }
-        modela
+        float modelanswer = uebergangsarray[modellength - 1][answer];
     }   
     
 
