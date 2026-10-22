@@ -184,7 +184,8 @@ int main(){
     //vorherige modelsize wiederherstellen sozusagen
     json datasetJson;
     datasetfile >> datasetJson;
-    float dataset[] = datasetJson[0]["image"];
+    float* dataset;
+    for(int i = 0; i < datasetJson[0]["image"])
 
     
     //open cl initialiersieren bei diesem teil bin ich erlich habe ich ai verwendet wie auch um sachen zu importieren
