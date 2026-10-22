@@ -8,7 +8,7 @@
 #include <vector>
 
 using json = nlohmann::json;
-
+//ich habe mir im internet die mnist trainingsdaten als json gedownloaded fuers trainieren gitbs 60 tausend udn fuers testen 10 tausend
 const char* kernelSource = R"(
 __kernel void array_add(int biassize, int inputsize, __global const float* Bias, __global const float* Input, __global const float* Weights, __global float* Output){
 
