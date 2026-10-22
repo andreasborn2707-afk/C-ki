@@ -374,9 +374,9 @@ int main(){
             dataset[i] = trainJson[datenzahl]["image"][i].get<int>();
         }
         answer = trainJson[datenzahl]["label"];
-        for(int i = 0; i < modelsize[0]; i++){
-            uebergangsarray[0] = ;
-        }
+        
+        uebergangsarray[0] = dataset;
+        
 
         
         for(int i = 0; i < modellength - 1; i++){
