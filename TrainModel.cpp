@@ -26,7 +26,9 @@ __kernel void array_add(int biassize, int inputsize, __global const float* Bias,
 )";
 const char* kernelSource = 
 __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs, __global int  inputsize){
-
+    //output is the output from the next layer
+    //inmput is the input from the prefious layer
+    //biassize is bacicly the 
     int i = get_global_id(0);
     
     if(i < outputsize){
@@ -39,7 +41,7 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
             error = Output[i] - 0.0f;
         }
         for(int j = 0 ; j < inputsize; j++){
-            delta[j] = error * Weights[(i * biassize) + j] *  (Output[i] * (1.0f - Output[i]))
+            delta[j] = error * Weights[(i * inputsize) + j] *  (Output[i] * (1.0f - Output[i]))
             BiasGradient[j] = delta[j]
             weightGradient = delta[j]
         }
