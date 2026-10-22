@@ -181,9 +181,10 @@ void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float out
     err = clSetKernelArg(kernel, , sizeof(int), &biaseLength);
     err = clSetKernelArg(kernel, 1, sizeof(int), &outputsize);
     err = clSetKernelArg(kernel, 2, sizeof(cl_mem), &devbias);
-    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devInput);
+    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devOutput);
     err = clSetKernelArg(kernel, 4, sizeof(cl_mem), &devWeight);
-    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devOutput);
+    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devBiasgradiant);
+    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &WeightGradiant);
 
     //jetzt fuehren wir das obere program aus
     //sagt basicly wie biele thrats gebraucht werden bei uns ist es 1 pro neuron
