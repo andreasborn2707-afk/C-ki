@@ -6,6 +6,7 @@
 #include <fstream>
 #include <random>
 #include <vector>
+#include <cmath>
 
 using json = nlohmann::json;
 //ich habe mir im internet die mnist trainingsdaten als json gedownloaded fuers trainieren gitbs 60 tausend udn fuers testen 10 tausend
