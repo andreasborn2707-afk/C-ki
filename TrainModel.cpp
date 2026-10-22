@@ -187,13 +187,15 @@ int main(){
         }
     }
     //holt die trainings daten
-    std::ifstream trainingfile ("mnist_.json");
+    std::ifstream trainingfile ("mnist_handwritten_train.json");
     if(!trainingfile.is_open()){
-        std::cout << "fehler beim laden der biase json" << std::endl;
+        std::cout << "fehler beim laden der train daten json" << std::endl;
         return 1;
     }
-    json biaseJson;
-    biasefile >> biaseJson;
+    json trainJson;
+    trainingfile >> trainJson;
+    //wir erstellen einen array den wir immer wieder mit neuen test daten ueberschreiben koenen und einen antwort int
+    
 
 
 
