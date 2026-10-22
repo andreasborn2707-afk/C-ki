@@ -244,10 +244,12 @@ int main(){
         uebergangsarray[i] = new float[modelsize[i]];
     }
 
-    while(Loss > 0.08f)
-    {
+    while(Loss > 0.08f){
         //zuerst bestimmen wir welche trainings date wir holen 
-        
+        int datenzahl = distrib(gen);
+        for(int i = 0; i < modelsize[0]; i++){
+            
+        }
         for(int i = 0; i < modelsize[0]; i++){
             uebergangsarray[0][i] = 0.1f;
         }
