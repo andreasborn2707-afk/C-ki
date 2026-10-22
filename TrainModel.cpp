@@ -250,7 +250,7 @@ int main(){
         for(int i = 0; i < modelsize[0]; i++){
             dataset[i] = trainJson[datenzahl]["image"][i].get<int>();
         }
-        
+        answer = trainJson[datenzahl]["label"];
         for(int i = 0; i < modelsize[0]; i++){
             uebergangsarray[0][i] = 0.1f;
         }
@@ -262,6 +262,7 @@ int main(){
         for(int i = 0; i < modelsize[modellength - 1]; i++){
             std::cout << uebergangsarray[modellength - 1][i] << ' ';
         }
+        modela
     }   
     
 
