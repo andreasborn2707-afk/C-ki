@@ -101,6 +101,8 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
+void train(float Loss;)
+
 
 
 
