@@ -28,13 +28,8 @@ const char* kernelSource =
 __kernel void array_add(int biassize, int inputsize, __global const float* Bias, __global const float* Input, __global const float* Weights, __global float* Output){
 
     int i = get_global_id(0);
-    if(i < biassize){
-        float ubergang = 0.0f;
-        for(int j = 0; j < inputsize; j++)
-        {
-            ubergang += Input[j] * Weights[(i* inputsize) + j];
-        }
-        Output[i] = 1.0f / (1.0f + exp(-1 * (ubergang + Bias[i])));
+    if(i < inputsize){
+        
     }
 }
 )";
