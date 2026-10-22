@@ -31,7 +31,10 @@ __kernel void array_add(int trueAnswere, int biassize, int inputsize, __global c
     float error;
     if(i < inputsize){
         if(i = trueAnswere){
-            error
+            error = Input[i] - 1.0f;
+        }
+        else{
+            error = Input[i]
         }
         
     }
