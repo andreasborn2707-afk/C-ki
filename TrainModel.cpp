@@ -145,7 +145,7 @@ void train(float Loss, float biase[], int biaseLength, float output[], int outpu
 
     
 
-    cl_kernel kernel = clCreateKernel(program, "array_add", &err);
+    cl_kernel kernel = clCreateKernel(program1, "array_add", &err);
 
 
     
