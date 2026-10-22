@@ -371,6 +371,8 @@ int main(){
     while(Loss > 0.08f){
         //zuerst bestimmen wir welche trainings date wir holen 
         int datenzahl = distrib(gen);
+        float* BiasGradiant;
+        float* WeightGradiant;
         for(int i = 0; i < modelsize[0]; i++){
             dataset[i] = trainJson[datenzahl]["image"][i].get<int>();
         }
@@ -392,7 +394,7 @@ int main(){
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
         
         for(int i = 0; i < modellength - 1; i++){
-            uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
+            BiasGradiant, WeightGradiant = train(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
         }
     }   
     
