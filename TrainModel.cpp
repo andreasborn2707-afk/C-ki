@@ -65,7 +65,7 @@ cl_command_queue queue;
 cl_program program;
 cl_program program1;
 
-float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights, int trueAnswer,){
+float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights, int trueAnswer, int outputsize, float output[]){
 
     
 
