@@ -31,7 +31,7 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
     
     if(i < outputsize){
         float error;
-        float delta;
+        float delta = 0.0f;
         if(i == trueAnswere){
             error = Output[i] - 1.0f;
         }
@@ -65,7 +65,7 @@ cl_command_queue queue;
 cl_program program;
 cl_program program1;
 
-float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights){
+float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights, int trueAnswer,){
 
     
 
