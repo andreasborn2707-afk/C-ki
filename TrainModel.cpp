@@ -366,7 +366,7 @@ int main(){
     float* uebergangstraingarray[modellength];
     //test daten input
     for(int i = 0; i < modellength; i++){
-        uebergangstrainingarray[i] = new float[modelsize[i]];
+        uebergangstraingarray[i] = new float[modelsize[i]];
     }
 
     while(Loss > 0.08f){
@@ -393,9 +393,9 @@ int main(){
         float modelanswer = uebergangsarray[modellength - 1][answer];
         Loss = -1 * (std::log(modelanswer));
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
-        
-        for(int i = 0; i < modellength - 1; i++){
-            BiasGradiant, WeightGradiant = train(answer);
+        //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
+        for(int i = modellength - 1; i > 0; i--){
+            BiasGradiant, WeightGradiant = train(answer,biase[i]);
         }
     }   
     
