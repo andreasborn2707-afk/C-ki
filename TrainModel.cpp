@@ -29,15 +29,15 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
 
     int i = get_global_id(0);
     float error;
-    if(i < inputsize){
+    if(i < outputsize){
         if(i = trueAnswere){
-            error = Input[i] - 1.0f;
+            error = Output[i] - 1.0f;
         }
         else{
-            error = Input[i] - 0.0f;
+            error = Output[i] - 0.0f;
         }
         for(int j = 0 ; j < biassize; j++){
-            
+
         }
 
         
