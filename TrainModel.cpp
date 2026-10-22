@@ -394,7 +394,7 @@ int main(){
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
         
         for(int i = 0; i < modellength - 1; i++){
-            BiasGradiant, WeightGradiant = train(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
+            BiasGradiant, WeightGradiant = train(answer);
         }
     }   
     
