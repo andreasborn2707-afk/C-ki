@@ -65,7 +65,7 @@ cl_command_queue queue;
 cl_program program;
 cl_program program1;
 
-float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights, int trueAnswer, int outputsize, float output[]){
+float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights){
 
     
 
@@ -83,14 +83,10 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
     size_t biasBytes = sizeof(float) * biaseLength;
     size_t inputBytes = sizeof(float) * inputLength;
-    size_t outputBytes = sizeof(float) * outputsize;
-    size_t weightsBytes = sizeof(float) * inputLength * biaseLength;
-    size_t BiasGradiantBytes = sizeof(float) * biaseLength;
-    size_t WeightGradiantBytes = sizeof(float) * inputLength * biaseLength;
+    size_t weightsBytes = sizeof(float) * biaseLength * inputLength;
+    size_t outputBytes = sizeof(float) * biaseLength;
 
-
-    float* biasGradiant = new float[biaseLength];
-    float* WeightGradiant = new float[inputLength * biaseLength];
+    float* output = new float[biaseLength];
     //2d weights auf 1d flatten
     float* flatweights = new float[biaseLength * inputLength];
     for(int i = 0; i < biaseLength; i++){
@@ -104,7 +100,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     cl_mem devbias = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, biasBytes, biase, &err);
     cl_mem devInput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inputBytes, input, &err);
     cl_mem devWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, weightsBytes, flatweights, &err);
-    cl_mem devOutput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, outputBytes, output, &err);
+    cl_mem devOutput = clCreateBuffer(context, CL_MEM_WRITE_ONLY , outputBytes, NULL, &err);
     
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
     err = clSetKernelArg(kernel, 0, sizeof(int), &biaseLength);
@@ -141,7 +137,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-void train(float Loss, float biase[], int biaseLength, float output[], int outputLength,float** weights)
+void train(float Loss, float biase[], int biaseLength, float output[], int outputLength,float** weights,  float inputLength)
 {
      cl_int err;
 
@@ -155,8 +151,10 @@ void train(float Loss, float biase[], int biaseLength, float output[], int outpu
     
     size_t biasBytes = sizeof(float) * biaseLength;
     size_t inputBytes = sizeof(float) * inputLength;
-    size_t weightsBytes = sizeof(float) * biaseLength * inputLength;
-    size_t outputBytes = sizeof(float) * biaseLength;
+    size_t outputBytes = sizeof(float) * outputsize;
+    size_t weightbytes = sizeof(float) * inputLength * biaseLength;
+    size_t BiasGradiantBytes = sizeof(float) * biaseLength;
+    size_t WeightGradiantBytes = sizeof(float) * inputLength * biaseLength;
 
     float* output = new float[biaseLength];
     //2d weights auf 1d flatten
