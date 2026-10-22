@@ -222,18 +222,18 @@ int main(){
         uebergangsarray[i] = new float[modelsize[i]];
     }
 
-    for(int i = 0; i < 60000; i++)
+    while(Loss > 0.08)
     {
-        for(int j = 0; j < modelsize[0]; j++){
-            uebergangsarray[0][j] = 0.1f;
+        for(int f = 0; i < modelsize[0]; i++){
+            uebergangsarray[0][i] = 0.1f;
         }
 
         
-        for(int j = 0; j < modellength - 1; j++){
-            uebergangsarray[j + 1] = Forward(biase[j], modelsize[j+ 1], modelsize[j], uebergangsarray[j], weights[j]);
+        for(int i = 0; i < modellength - 1; i++){
+            uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
         }
-        for(int i = 0; i < modelsize[modellength - 1]; j++){
-            std::cout << uebergangsarray[modellength - 1][j << ' ';
+        for(int i = 0; i < modelsize[modellength - 1]; i++){
+            std::cout << uebergangsarray[modellength - 1][i] << ' ';
         }
     }   
     
