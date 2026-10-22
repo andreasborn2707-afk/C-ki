@@ -222,7 +222,7 @@ float* train(int TrueAnswer, float biase[], int biaseLength, float output[], int
 
 int main(){
     //einer unserer wichtigsten variablen der loss
-    float Loss;
+    float Loss = 1.0f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
     float learngradient = 0.01f;
 
@@ -313,7 +313,7 @@ int main(){
     json trainJson;
     trainingfile >> trainJson;
     //wir erstellen einen array den wir immer wieder mit neuen test daten ueberschreiben koenen und einen antwort int
-    int dataset[modelsize[0]];
+    float dataset[modelsize[0]];
     int answer;
 
 
