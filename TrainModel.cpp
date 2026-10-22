@@ -49,7 +49,10 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
         
         BiasGradient[i] = delta[i];
         
-
+        for (int j = 0; j < inputsize; j++){
+            weightGradient[(i * inputsize) + j] = delta[i] * Inputs[j];
+        }
+        
         
         
         
