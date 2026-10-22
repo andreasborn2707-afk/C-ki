@@ -137,7 +137,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-void train(float Loss, float biase[], int biaseLength, float output[], int outputLength,float** weights,  float inputLength)
+void train(float Loss, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength)
 {
      cl_int err;
 
@@ -156,7 +156,7 @@ void train(float Loss, float biase[], int biaseLength, float output[], int outpu
     size_t BiasGradiantBytes = sizeof(float) * biaseLength;
     size_t WeightGradiantBytes = sizeof(float) * inputLength * biaseLength;
 
-    float* output = new float[biaseLength];
+    float* BiasGradiant = new float[]
     //2d weights auf 1d flatten
     float* flatweights = new float[biaseLength * inputLength];
     for(int i = 0; i < biaseLength; i++){
