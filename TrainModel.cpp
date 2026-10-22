@@ -84,8 +84,8 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     size_t biasBytes = sizeof(float) * biaseLength;
     size_t inputBytes = sizeof(float) * inputLength;
     size_t outputBytes = sizeof(float) * outputsize;
-    size_t inputBytes = sizeof(float) * inputLength;
-    size_t weightsBytes = sizeof(float) * biaseLength * inputLength;
+    size_t weightbytes = sizeof(float) * inputLength * inputLength;
+    size_t BiasGradiantBytes = sizeof(float) * biaseLength * inputLength;
     size_t outputBytes = sizeof(float) * biaseLength;
 
 
