@@ -178,13 +178,15 @@ void train(int TrueAnswer, float Loss, float biase[], int biaseLength, float out
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
     //int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize
     err = clSetKernelArg(kernel, 0, sizeof(int), &TrueAnswer);
-    err = clSetKernelArg(kernel, , sizeof(int), &biaseLength);
-    err = clSetKernelArg(kernel, 1, sizeof(int), &outputsize);
-    err = clSetKernelArg(kernel, 2, sizeof(cl_mem), &devbias);
-    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devOutput);
-    err = clSetKernelArg(kernel, 4, sizeof(cl_mem), &devWeight);
-    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devBiasgradiant);
-    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &WeightGradiant);
+    err = clSetKernelArg(kernel, 1, sizeof(int), &biaseLength);
+    err = clSetKernelArg(kernel, 2, sizeof(int), &outputsize);
+    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devbias);
+    err = clSetKernelArg(kernel, 4, sizeof(cl_mem), &devOutput);
+    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devWeight);
+    err = clSetKernelArg(kernel, 6, sizeof(cl_mem), &devBiasgradiant);
+    err = clSetKernelArg(kernel, 7, sizeof(cl_mem), &devWeightGradiant);
+    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devInput);
+    err = clSetKernelArg(kernel, 1, sizeof(int), &inputLength);
 
     //jetzt fuehren wir das obere program aus
     //sagt basicly wie biele thrats gebraucht werden bei uns ist es 1 pro neuron
