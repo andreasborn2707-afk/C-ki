@@ -108,6 +108,14 @@ int main(){
     //einer unserer wichtigsten variablen der loss
     float Loss;
 
+    //das wird einfach immer ein random aus der train json holen
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // 2. Den gewünschten Bereich definieren [min, max]
+    std::uniform_int_distribution<int> distrib(0, 60000);
+
+
     //zuerst lesen wir die model groese aus
     std::ifstream file ("modelsize.json");
     if(!file.is_open()){
