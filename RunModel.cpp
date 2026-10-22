@@ -177,14 +177,14 @@ int main(){
     }
     //jetzt einfach einer der test images holen'
     std::ifstream datasetfile ("mnist_handwritten_test.json");
-    if(!file.is_open()){
+    if(!datasetfile.is_open()){
         std::cout << "fehler beim laden der dataset json" << std::endl;
         return 1;
     }
     //vorherige modelsize wiederherstellen sozusagen
     json datasetJson;
     datasetfile >> datasetJson;
-    int[] dataset = datasetJson["image"];
+    int dataset[784] = datasetJson["image"];
     std::cout << dataset << std::endl;
     //open cl initialiersieren bei diesem teil bin ich erlich habe ich ai verwendet wie auch um sachen zu importieren
     cl_int err;
