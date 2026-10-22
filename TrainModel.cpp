@@ -39,7 +39,7 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
             error = Output[i] - 0.0f;
         }
         for(int j = 0 ; j < biassize; j++){
-            delta = error * Weights[(i * biassize) + j] * 
+            delta = error * Weights[(i * biassize) + j] *  (Output[i] * (1.0f - Output[i]))
         }
 
         
