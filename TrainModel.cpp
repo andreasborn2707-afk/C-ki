@@ -25,13 +25,13 @@ __kernel void array_add(int biassize, int inputsize, __global const float* Bias,
 }
 )";
 const char* kernelSource = 
-__kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float BiasGradient, ){
+__kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient){
 
     int i = get_global_id(0);
     
     if(i < outputsize){
         float error;
-        float delta;
+        float* delta;
         if(i = trueAnswere){
             error = Output[i] - 1.0f;
         }
@@ -39,9 +39,10 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
             error = Output[i] - 0.0f;
         }
         for(int j = 0 ; j < biassize; j++){
-            delta = error * Weights[(i * biassize) + j] *  (Output[i] * (1.0f - Output[i]))
+            delta[j] = error * Weights[(i * biassize) + j] *  (Output[i] * (1.0f - Output[i]))
         }
-
+        BiasGradient = delta;
+        
         
     }
 }
