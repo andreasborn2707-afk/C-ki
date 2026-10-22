@@ -40,9 +40,9 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
         }
         for(int j = 0 ; j < inputsize; j++){
             delta[j] = error * Weights[(i * inputsize) + j] *  (Output[i] * (1.0f - Output[i]))
-            BiasGradient[j] = delta[j]
-            weightGradient = delta[j]
+            
         }
+        
         
         
         
