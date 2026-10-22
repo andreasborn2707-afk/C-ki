@@ -363,11 +363,7 @@ int main(){
     for(int i = 0; i < modellength; i++){
         uebergangsarray[i] = new float[modelsize[i]];
     }
-    float* uebergangstraingarray[modellength];
-    //test daten input
-    for(int i = 0; i < modellength; i++){
-        uebergangstraingarray[i] = new float[modelsize[i]];
-    }
+    
 
     while(Loss > 0.08f){
         //zuerst bestimmen wir welche trainings date wir holen 
@@ -379,7 +375,7 @@ int main(){
         }
         answer = trainJson[datenzahl]["label"];
         for(int i = 0; i < modelsize[0]; i++){
-            uebergangsarray[0][i] = 0.1f;
+            uebergangsarray[0] = ;
         }
 
         
