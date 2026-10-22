@@ -28,8 +28,10 @@ const char* kernelSource =
 __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights){
 
     int i = get_global_id(0);
-    float error;
+    
     if(i < outputsize){
+        float error;
+        float delta;
         if(i = trueAnswere){
             error = Output[i] - 1.0f;
         }
@@ -37,7 +39,7 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
             error = Output[i] - 0.0f;
         }
         for(int j = 0 ; j < biassize; j++){
-            
+            delta = error * Weights[]
         }
 
         
