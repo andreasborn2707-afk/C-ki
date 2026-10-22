@@ -37,7 +37,7 @@ __kernel void array_add(int trueAnswere, int biassize, int outputsize, __global 
             error = Output[i] - 0.0f;
         }
         for(int j = 0 ; j < biassize; j++){
-
+            
         }
 
         
