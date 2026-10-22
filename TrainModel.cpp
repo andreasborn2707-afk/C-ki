@@ -176,7 +176,7 @@ float* train(int TrueAnswer, float biase[], int biaseLength, float output[], int
     cl_mem devWeightGradiant = clCreateBuffer(context, CL_MEM_WRITE_ONLY , WeightGradiantBytes, NULL, &err);
     
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
-    err = clSetKernelArg(kernel, 1, sizeof(int), &TrueAnswer);
+    err = clSetKernelArg(kernel, 0, sizeof(int), &TrueAnswer);
     err = clSetKernelArg(kernel, 1, sizeof(int), &biaseLength);
     err = clSetKernelArg(kernel, 2, sizeof(int), &outputsize);
     err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devbias);
@@ -413,6 +413,7 @@ int main(){
     clReleaseCommandQueue(queue);
     clReleaseContext(context);
     clReleaseProgram(program);
+    clReleaseProgram(program1);
     return 0;
 }
 
