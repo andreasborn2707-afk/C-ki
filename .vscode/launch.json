@@ -43,7 +43,12 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
+            "environment": [
+                {
+                    "name": "RUSTICL_ENABLE",
+                    "value": "radeonsi"
+                }
+            ],
             "externalConsole": false,
             "MIMode": "gdb",
             "preLaunchTask": "Build TrainModel"
