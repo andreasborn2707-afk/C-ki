@@ -221,6 +221,9 @@ int main(){
     for(int i = 0; i < modellength; i++){
         uebergangsarray[i] = new float[modelsize[i]];
     }
+
+    for(int i = 0; i < 60000; i++)
+    {
     for(int i = 0; i < modelsize[0]; i++){
         uebergangsarray[0][i] = 0.1f;
     }
