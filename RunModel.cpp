@@ -188,7 +188,7 @@ int main(){
 
     for(int i = 0; i < modelsize[0]; i++)
     {
-        dataset[i] = datasetJson[0]["image"];
+        dataset[i] = datasetJson[0]["image"][0].as<float>();
     }
     
     std::cout << dataset;
