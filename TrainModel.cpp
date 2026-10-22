@@ -25,7 +25,7 @@ __kernel void array_add(int biassize, int inputsize, __global const float* Bias,
 }
 )";
 const char* kernelSource = 
-__kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights){
+__kernel void array_add(int trueAnswere, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float BiasGradient, ){
 
     int i = get_global_id(0);
     
