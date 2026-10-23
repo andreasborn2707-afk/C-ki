@@ -187,7 +187,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     //gpu buffers erstellen fuer alle arrays
     cl_mem devPreviousDelta = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, previousDeltaBytes, previousDelta, &err);
     cl_mem devpreviousWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, previousweightsBytes, flatpreviousWeights, &err);
-    cl_mem devDelta = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, DeltaByes, NULL, &err);
+    cl_mem devDelta = clCreateBuffer(context, CL_MEM_WRITE_ONLY, DeltaByes, NULL, &err);
     cl_mem devInput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inputBytes, input, &err);
     cl_mem devWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, weightsbytes, flatweights, &err);
     cl_mem devOutput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, outputBytes, output, &err);
@@ -419,6 +419,7 @@ int main(){
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         int isend;
         float** returns;
+        int outsize = modelsize[modellength - 1]
         float firstDelta[modelsize[modellength - 1]];
         float* currentdelta;
         for(int i = modellength - 1; i > 0; i--){
