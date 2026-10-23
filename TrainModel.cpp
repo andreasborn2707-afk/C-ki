@@ -385,7 +385,7 @@ int main(){
     float* uebergangsarray[modellength];
     
 
-    while(Loss > 0.08f){
+    for(int {
         //zuerst bestimmen wir welche trainings date wir holen 
         int datenzahl = distrib(gen);
         float* BiasGradiant;
