@@ -224,7 +224,7 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
 
     clReleaseMemObject(devDelta);
     clReleaseMemObject(devPreviousDelta);
-    clReleaseMemObject(devpreviousWeight)
+    clReleaseMemObject(devpreviousWeight);
     clReleaseMemObject(devInput);
     clReleaseMemObject(devWeight);
     clReleaseMemObject(devOutput);
@@ -415,7 +415,12 @@ int main(){
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         for(int i = modellength - 1; i > 0; i--){
+            //float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
+            
             BiasGradiant, WeightGradiant = train(answer,biase[i],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i]);
+            
+            
+            //hier applien wir den gradient
             for(int j = 0; j < modelsize[i + 1]; j++){
                 biase[i][j] = biase[i][j] - (learngradient * BiasGradiant[j]);
             }
