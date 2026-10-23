@@ -36,7 +36,7 @@ __kernel void array_add(int isend, int previoussize, __global const float* previ
             
             for (int j = 0; j < inputsize; j++)
             {
-                delta += previousDelta[i] * Weights[(i * inputsize) + j];
+                delta += (Output[i] - previousDelta[i]) * Weights[(i * inputsize) + j];
             }
             delta *= (Output[i] * (1.0f - Output[i]));
 
@@ -44,7 +44,7 @@ __kernel void array_add(int isend, int previoussize, __global const float* previ
             BiasGradient[i] = delta;
             
             for (int j = 0; j < inputsize; j++){
-                weightGradient[(i * inputsize) + j] = delta[i] * inputs[j];
+                weightGradient[(i * inputsize) + j] = delta * inputs[j];
             }
         }
         else{
