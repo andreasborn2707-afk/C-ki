@@ -148,7 +148,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
 
 float** train(int isend, float previousDelta[],  int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
 {
-    float* returns[3];
+    float** returns = new float*[3];
      cl_int err;
 
     
@@ -424,7 +424,7 @@ int main(){
             
             
             
-            if(i == modellength - 1){
+            if(i == modellength - 2){
                 isend = 1;
                 for(int j = 0; j < modelsize[modellength - 1]; j++){
                     if(j == answer){
