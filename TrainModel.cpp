@@ -407,7 +407,7 @@ int main(){
         }
         
         float modelanswer = uebergangsarray[modellength - 1][answer];
-        Loss = -1 * (std::log(1.0f - modelanswer));
+        Loss = -1 * std::log(modelanswer);
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         int isend;
