@@ -193,7 +193,7 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
     cl_mem devBiasgradiant = clCreateBuffer(context, CL_MEM_WRITE_ONLY , BiasGradiantBytes, NULL, &err);
     cl_mem devWeightGradiant = clCreateBuffer(context, CL_MEM_WRITE_ONLY , WeightGradiantBytes, NULL, &err);
     
-    //_kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __global  float* Delta,  int outputsize, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
+    
     
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
     err = clSetKernelArg(kernel, 0, sizeof(int), &isend);
@@ -206,8 +206,8 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
     err = clSetKernelArg(kernel, 7, sizeof(cl_mem), &devWeight);
     err = clSetKernelArg(kernel, 8, sizeof(cl_mem), &devBiasgradiant);
     err = clSetKernelArg(kernel, 9, sizeof(cl_mem), &devWeightGradiant);
-    err = clSetKernelArg(kernel, 8, sizeof(cl_mem), &devInput);
-    err = clSetKernelArg(kernel, 9, sizeof(int), &inputLength);
+    err = clSetKernelArg(kernel, 10, sizeof(cl_mem), &devInput);
+    err = clSetKernelArg(kernel, 11, sizeof(int), &inputLength);
 
     //jetzt fuehren wir das obere program aus
     //sagt basicly wie biele thrats gebraucht werden bei uns ist es 1 pro neuron
@@ -219,7 +219,7 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
     //jetzt das output rauslesen und auf die cpu machen
     err = clEnqueueReadBuffer(queue, devBiasgradiant, CL_TRUE, 0, BiasGradiantBytes, BiasGradiant, 0, NULL, NULL);
     err = clEnqueueReadBuffer(queue, devWeightGradiant, CL_TRUE, 0, WeightGradiantBytes, WeightGradiant, 0, NULL, NULL);
-
+    err = clEnqueueReadBuffer(queue, devWeightGradiant, CL_TRUE, 0, DeltaByes, Delta, 0, NULL, NULL);
     //jetzt noch hinter uns aufrauemen
 
     clReleaseMemObject(devbias);
