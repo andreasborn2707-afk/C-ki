@@ -146,7 +146,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousWeightLength)
+float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
 {
      cl_int err;
 
@@ -160,7 +160,7 @@ float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[]
     //_kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __global  float* Delta,  int outputsize, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
     
     size_t previousDeltaBytes = sizeof(float) * previousLength;
-    size_t previousweightsBytes = sizeof(float) * previousWeightLength;
+    size_t previousweightsBytes = sizeof(float) * previousBiasLength * previousInputLength;
     size_t DeltaByes = sizeof(float) * previousLength;
     size_t inputBytes = sizeof(float) * inputLength;
     size_t outputBytes = sizeof(float) * outputsize;
@@ -178,8 +178,8 @@ float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[]
             flatweights[(i * inputLength) + j] = weights[i][j];
         }
     }
-    for(int i = 0; i < previousWeightLength; i ++){
-        
+    for(int i = 0; i < previousBiasLength; i ++){
+        for(int )
     }
 
     //gpu buffers erstellen fuer alle arrays
