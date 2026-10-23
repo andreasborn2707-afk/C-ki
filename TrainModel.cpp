@@ -180,7 +180,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     }
     for(int i = 0; i < previousBiasLength; i ++){
         for(int j = 0; j < previousInputLength; j++){
-            flatweights[(i * previousInputLength) + j] = previousWeights[i][j];
+            flatpreviousWeights[(i * previousInputLength) + j] = previousWeights[i][j];
         }
     }
 
