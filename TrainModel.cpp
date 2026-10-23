@@ -258,7 +258,7 @@ int main(){
     std::mt19937 gen(rd());
 
     
-    std::uniform_int_distribution<int> distrib(0, 60000);
+    std::uniform_int_distribution<int> distrib(0, 60000 - 1);
 
 
     //zuerst lesen wir die model groese aus
@@ -480,7 +480,7 @@ int main(){
             delete[] returns;
             
         }
-        delete[] firstDelta;
+        
     }   
     
     
