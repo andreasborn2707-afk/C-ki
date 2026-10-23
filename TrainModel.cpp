@@ -412,7 +412,7 @@ int main(){
         for(int i = 0; i < modelsize[modellength - 1]; i++){
             std::cout << uebergangsarray[modellength - 1][i] << ' ';
         }
-        //das ist nicht was das modle geantwortet hat sondern wir schauen die zahln an wo 1 stehen sollte also wo die richtige antwot steht um zu berechnen wie stark das model verkackt hat
+        
         float modelanswer = uebergangsarray[modellength - 1][answer];
         Loss = -1 * (std::log(modelanswer));
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
