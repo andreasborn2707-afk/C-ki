@@ -417,12 +417,13 @@ int main(){
         Loss = -1 * (std::log(modelanswer));
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
+        int isend;
+        float** returns;
+        float firstDelta[10];
         for(int i = modellength - 1; i > 0; i--){
             
-            int isend;
-            float** returns;
-            float firstDelta[10];
-            float* Delta;
+            
+            
             if(i == modellength - 1){
                 isend = 1;
                 for(int j = 0; j < modelsize[modellength - 1]; j++){
@@ -435,11 +436,12 @@ int main(){
                     }
                 }
                 returns = train(isend,firstDelta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
-                Delta = returns[2]
+                
             }
             else{
                 isend = 0;
                 returns = train(isend,returns[2],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
+                
             }
 
             
