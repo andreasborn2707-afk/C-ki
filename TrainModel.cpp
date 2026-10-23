@@ -417,16 +417,16 @@ int main(){
         for(int i = modellength - 1; i > 0; i--){
             
             int isend;
-            float* Delta;
+            float* firstDelta[10];
             if(i == modellength - 1){
                 isend = 1;
                 for(int j = 0; j < modelsize[modellength]; j++){
                     if(j == answer){
-                        Delta[i] = 1;
+                        firstDelta[i] = 1;
                         
                     }
                     else{
-                        Delta[i] = 0;
+                        firstDelta[i] = 0;
                     }
                 }
             }
