@@ -474,12 +474,12 @@ int main(){
         for(int i = modellength - 1; i > 0; i--){
             for(int j = 0; j < modelsize[i]; j++){
                     
-                biase[i - 1][j] = biase[i- 1][j] - (learngradient * returns[0][j]);
+                biase[i - 1][j] = biase[i- 1][j] - (learngradient * BiasGradiants[i][j]);
             }
             for(int j = 0; j < modelsize[i]; j++){
                 for(int k = 0; k < modelsize[i - 1]; k++){
                         
-                    weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * returns[1][(j*modelsize[i - 1]) + k]);
+                    weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * weightgradiants[i][(j*modelsize[i - 1]) + k]);
                 }
             }
         }
