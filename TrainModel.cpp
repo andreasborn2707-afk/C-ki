@@ -458,10 +458,10 @@ int main(){
             
             
             //hier applien wir den gradient
-            for(int j = 0; j < modelsize[i + 1]; j++){
+            for(int j = 0; j < modelsize[i]; j++){
                 biase[i - 1][j] = biase[i- 1][j] - (learngradient * returns[0][j]);
             }
-            for(int j = 0; j < modelsize[i + 1]; j++){
+            for(int j = 0; j < modelsize[i ]; j++){
                 for(int k = 0; k < modelsize[i]; k++)
                 {
                     weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * returns[1][(j*modelsize[i - 1]) + k]);
