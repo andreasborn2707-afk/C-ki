@@ -420,7 +420,7 @@ int main(){
         int isend;
         float** returns;
         float firstDelta[modelsize[modellength - 1]];
-        for(int i = modellength - 2; i >= 0; i--){
+        for(int i = modellength - 2; i > 0; i--){
             
             
             
@@ -440,7 +440,7 @@ int main(){
             }
             else{
                 isend = 0;
-                returns = train(isend,returns[2],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i], modelsize[i+1],modelsize[i]);
+                returns = train(isend,returns[2],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i - 1], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i], modelsize[i+1],modelsize[i]);
                 
             }
 
