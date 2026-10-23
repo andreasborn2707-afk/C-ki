@@ -248,7 +248,7 @@ int main(){
     //einer unserer wichtigsten variablen der loss
     float Loss = 1.0f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
-    float learngradient = 0.001f;
+    float learngradient = 0.00001f;
 
     
     std::random_device rd;
