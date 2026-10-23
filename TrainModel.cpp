@@ -146,7 +146,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-float* train(int isend, float previousDelta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
+float* train(int isend, float previousDelta[],  int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
 {
      cl_int err;
 
@@ -415,7 +415,7 @@ int main(){
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         for(int i = modellength - 1; i > 0; i--){
-            //float* train(int isend, float previousDelta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
+            //float* train(int isend, float previousDelta[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
             int isend;
             float* Delta;
             if(i == modellength - 1){
@@ -433,7 +433,7 @@ int main(){
             else{
                 isend = 0;
             }
-            BiasGradiant, WeightGradiant, Delta = train(isend,biase[i],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i]);
+            BiasGradiant, WeightGradiant, Delta = train(isend,Deltabiase[i],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i]);
             
             
             //hier applien wir den gradient
