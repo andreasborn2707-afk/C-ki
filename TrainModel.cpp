@@ -460,18 +460,7 @@ int main(){
             
             BiasGradiants[i] = returns[0];
             weightgradiants[i] = returns[1];
-            //hier applien wir den gradient
-            for(int j = 0; j < modelsize[i]; j++){
-                
-                biase[i - 1][j] = biase[i- 1][j] - (learngradient * returns[0][j]);
-            }
-            for(int j = 0; j < modelsize[i ]; j++){
-                for(int k = 0; k < modelsize[i - 1]; k++)
-                {
-                    
-                    weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * returns[1][(j*modelsize[i - 1]) + k]);
-                }
-            }
+            
 
             currentdelta = returns[2];
 
@@ -480,6 +469,21 @@ int main(){
             delete[] returns;
             
         }
+
+        //hier applien wir den gradient
+        for(int i = modellength - 1; i > 0; i--){
+            for(int j = 0; j < modelsize[i]; j++){
+                    
+                biase[i - 1][j] = biase[i- 1][j] - (learngradient * returns[0][j]);
+            }
+            for(int j = 0; j < modelsize[i]; j++){
+                for(int k = 0; k < modelsize[i - 1]; k++){
+                        
+                    weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * returns[1][(j*modelsize[i - 1]) + k]);
+                }
+            }
+        }
+
 
         delete[] currentdelta;
         for(int i = 1; i < modellength; i++){
