@@ -220,7 +220,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     //jetzt das output rauslesen und auf die cpu machen
     err = clEnqueueReadBuffer(queue, devBiasgradiant, CL_TRUE, 0, BiasGradiantBytes, BiasGradiant, 0, NULL, NULL);
     err = clEnqueueReadBuffer(queue, devWeightGradiant, CL_TRUE, 0, WeightGradiantBytes, WeightGradiant, 0, NULL, NULL);
-    err = clEnqueueReadBuffer(queue, devWeightGradiant, CL_TRUE, 0, DeltaByes, Delta, 0, NULL, NULL);
+    err = clEnqueueReadBuffer(queue, devDelta, CL_TRUE, 0, DeltaByes, Delta, 0, NULL, NULL);
     //jetzt noch hinter uns aufrauemen
 
     clReleaseMemObject(devDelta);
