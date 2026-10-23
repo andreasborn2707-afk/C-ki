@@ -44,7 +44,7 @@ __kernel void array_add(__global const float* previousDelta, __gloabal const flo
         BiasGradient[i] = delta;
         
         for (int j = 0; j < inputsize; j++){
-            weightGradient[(i * inputsize) + j] = delta * inputs[j];
+            weightGradient[(i * inputsize) + j] = delta[i] * inputs[j];
         }
         
         
