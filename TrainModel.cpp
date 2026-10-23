@@ -422,7 +422,6 @@ int main(){
             int isend;
             float** returns;
             float firstDelta[10];
-            float* Delta;
             if(i == modellength - 1){
                 isend = 1;
                 for(int j = 0; j < modelsize[modellength]; j++){
@@ -445,12 +444,12 @@ int main(){
             
             //hier applien wir den gradient
             for(int j = 0; j < modelsize[i + 1]; j++){
-                biase[i][j] = biase[i][j] - (learngradient * BiasGradiant[j]);
+                biase[i][j] = biase[i][j] - (learngradient * returns[0][j]);
             }
             for(int j = 0; j < modelsize[i + 1]; j++){
                 for(int k = 0; k < modelsize[i]; k++)
                 {
-                    weights[i][j][k] = weights[i][j][k] - (learngradient * WeightGradiant[(j*modelsize[i]) + k]);
+                    weights[i][j][k] = weights[i][j][k] - (learngradient * returns[1][(j*modelsize[i]) + k]);
                 }
             }
             
