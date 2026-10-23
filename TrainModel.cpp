@@ -479,6 +479,30 @@ int main(){
         delete[] firstDelta;
     }   
     
+    
+    json weightJson = json::array
+    for(int i = 0; i < modellength - 1; i++){
+        json jsonLayer = json::array();
+        for(int j = 0; j < modelsize[i+1]; j++){
+            json jsonRow = json::array();
+            for(int k = 0; k < modelsize[i]; k++){
+                jsonRow.push_back(weights[i][j][k]);
+            }
+            jsonLayer.push_back(jsonRow);
+        }
+        weightsJson.push_back(jsonLayer);
+    }
+
+    json biasesJson = json::array();
+    for(int i = 0; i <modellength - 1; i++){
+        json row = json::array();
+        for(int j = 0; j < modelsize[i +1]; j++){
+            row.push_back(biase[i][j]);
+        }
+        biasesJson.push_back(row);
+    }
+
+
 
     clReleaseCommandQueue(queue);
     clReleaseContext(context);
