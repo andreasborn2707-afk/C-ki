@@ -391,7 +391,7 @@ int main(){
         float* BiasGradiant;
         float* WeightGradiant;
         for(int i = 0; i < modelsize[0]; i++){
-            dataset[i] = trainJson[datenzahl]["image"][i].get<int>();
+            dataset[i] = trainJson[datenzahl]["image"][i].get<int>() / 255.0f;
         }
         answer = trainJson[datenzahl]["label"];
         
