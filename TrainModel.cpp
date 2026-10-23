@@ -146,7 +146,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-float* train(int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** )
+float* train(int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousWeightLength)
 {
      cl_int err;
 
@@ -160,6 +160,7 @@ float* train(int TrueAnswer, float biase[], int biaseLength, float output[], int
     //_kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __global  float* Delta,  int outputsize, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
     
     size_t previousDeltabytes = sizeof(float) * previousLength;
+    size_t previousweightsbytes = sizeof(float) * previousWeightLength;
     size_t inputBytes = sizeof(float) * inputLength;
     size_t outputBytes = sizeof(float) * outputsize;
     size_t weightsbytes = sizeof(float) * inputLength * biaseLength;
