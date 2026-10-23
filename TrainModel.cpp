@@ -156,7 +156,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     
 
     cl_kernel kernel = clCreateKernel(program1, "array_add", &err);
-    float* Delta;
+    float* Delta = new float[previousLength];
 
     
     size_t previousDeltaBytes = sizeof(float) * previousLength;
@@ -187,7 +187,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     //gpu buffers erstellen fuer alle arrays
     cl_mem devPreviousDelta = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, previousDeltaBytes, previousDelta, &err);
     cl_mem devpreviousWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, previousweightsBytes, flatpreviousWeights, &err);
-    cl_mem devDelta = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, DeltaByes, Delta, &err);
+    cl_mem devDelta = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, DeltaByes, NULL, &err);
     cl_mem devInput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inputBytes, input, &err);
     cl_mem devWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, weightsbytes, flatweights, &err);
     cl_mem devOutput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, outputBytes, output, &err);
