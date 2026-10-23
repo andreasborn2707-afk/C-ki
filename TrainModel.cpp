@@ -419,7 +419,7 @@ int main(){
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         int isend;
         float** returns;
-        float firstDelta[10];
+        float firstDelta[modelsize[modellength - 1]];
         for(int i = modellength - 1; i > 0; i--){
             
             
