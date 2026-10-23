@@ -146,7 +146,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
+float* train(int isend, float previousDelta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
 {
      cl_int err;
 
@@ -155,7 +155,7 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
     
 
     cl_kernel kernel = clCreateKernel(program1, "array_add", &err);
-
+    float* Delta;
 
     
     size_t previousDeltaBytes = sizeof(float) * previousLength;
@@ -415,7 +415,7 @@ int main(){
         std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         for(int i = modellength - 1; i > 0; i--){
-            //float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
+            //float* train(int isend, float previousDelta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
             int isend;
             float* Delta;
             if(i == modellength - 1){
