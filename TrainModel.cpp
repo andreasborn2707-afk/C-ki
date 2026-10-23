@@ -423,18 +423,19 @@ int main(){
                 isend = 1;
                 for(int j = 0; j < modelsize[modellength]; j++){
                     if(j == answer){
-                        firstDelta[i] = 1.0f;
+                        firstDelta[j] = 1.0f;
                         
                     }
                     else{
-                        firstDelta[i] = 0.0f;
+                        firstDelta[j] = 0.0f;
                     }
                 }
+                BiasGradiant, WeightGradiant, Delta = train(isend,firstDelta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
             }
             else{
                 isend = 0;
             }
-            
+
             BiasGradiant, WeightGradiant, Delta = train(isend,Delta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
             
             
