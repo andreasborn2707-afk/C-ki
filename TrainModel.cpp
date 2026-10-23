@@ -30,19 +30,13 @@ __kernel void array_add(__global const float* previousDelta, int biassize, int o
     int i = get_global_id(0);
     
     if(i < outputsize){
-        float error;
         float delta = 0.0f;
-        if(i == trueAnswere){
-            error = Output[i] - 1.0f;
-        }
-        else{
-            error = Output[i] - 0.0f;
-        }
+        
         
         
         for (int j = 0; j < inputsize; j++)
         {
-            delta += error * Weights[(i * inputsize) + j];
+            delta += previousDelta[i] * Weights[(i * inputsize) + j];
         }
         delta *= (Output[i] * (1.0f - Output[i]));
 
