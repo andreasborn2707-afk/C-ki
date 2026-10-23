@@ -235,11 +235,11 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
 
 
 
-    retruns[0] = BiasGradiant;
+    returns[0] = BiasGradiant;
     returns[1] = WeightGradiant;
-    returns[2] = Delta
+    returns[2] = Delta;
     
-    return BiasGradiant WeightGradiant Delta;
+    return returns;
 
 }
 
@@ -420,6 +420,7 @@ int main(){
         for(int i = modellength - 1; i > 0; i--){
             
             int isend;
+            float** returns;
             float firstDelta[10];
             float* Delta;
             if(i == modellength - 1){
@@ -433,13 +434,13 @@ int main(){
                         firstDelta[j] = 0.0f;
                     }
                 }
-                BiasGradiant, WeightGradiant, Delta = train(isend,firstDelta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
+                returns = train(isend,firstDelta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
             }
             else{
                 isend = 0;
             }
 
-            BiasGradiant, WeightGradiant, Delta = train(isend,Delta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
+            returns = train(isend,returns[2],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
             
             
             //hier applien wir den gradient
