@@ -448,11 +448,11 @@ int main(){
                 
             }
             if(i == modellength - 1){
-                std::cout << "training..." << std::endl;
+                
                 returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i], weights[i - 1], modelsize[i],modelsize[i - 1]);
             }
             else{
-                std::cout << "training..." << std::endl;
+                
                 returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i + 1], weights[i ], modelsize[i + 1],modelsize[i]);
             }
             
@@ -462,13 +462,13 @@ int main(){
             
             //hier applien wir den gradient
             for(int j = 0; j < modelsize[i]; j++){
-                std::cout << "chainging biases..." << std::endl;
+                
                 biase[i - 1][j] = biase[i- 1][j] - (learngradient * returns[0][j]);
             }
             for(int j = 0; j < modelsize[i ]; j++){
                 for(int k = 0; k < modelsize[i - 1]; k++)
                 {
-                    std::cout << "changing weights..." << std::endl;
+                    
                     weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * returns[1][(j*modelsize[i - 1]) + k]);
                 }
             }
