@@ -172,12 +172,14 @@ float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[]
     float* WeightGradiant = new float[outputsize * biaseLength];
     //2d weights auf 1d flatten
     float* flatweights = new float[biaseLength * inputLength];
-    fl
+    float* flatpreviousWeights = new float[previousWeightLength];
     for(int i = 0; i < biaseLength; i++){
-        for(int j = 0; j < inputLength; j++)
-        {
+        for(int j = 0; j < inputLength; j++){
             flatweights[(i * inputLength) + j] = weights[i][j];
         }
+    }
+    for(int i = 0; i < previousWeightLength; i ++){
+        
     }
 
     //gpu buffers erstellen fuer alle arrays
