@@ -468,9 +468,14 @@ int main(){
                 }
             }
 
-            cureentDelta = returns[2]
+            currentdelta = returns[2];
+
+            delete[] returns[0];
+            delete[] returns[1];
+            delete[] returns[2];
             
         }
+        delete[] firstDelta;
     }   
     
 
