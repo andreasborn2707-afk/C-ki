@@ -34,10 +34,9 @@ __kernel void array_add(int isend, int previoussize, __global const float* previ
         if(isend == 1){
         
             
-            for (int j = 0; j < inputsize; j++)
-            {
-                delta += (Output[i] - previousDelta[i]);
-            }
+            
+            delta += (Output[i] - previousDelta[i]);
+            
             delta *= (Output[i] * (1.0f - Output[i]));
 
             
