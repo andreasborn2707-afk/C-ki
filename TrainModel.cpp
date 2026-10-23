@@ -30,7 +30,7 @@ __kernel void array_add(int isend, int previoussize, __global const float* previ
     int i = get_global_id(0);
     
     if(i < outputsize){
-        float delta = 1.0f;
+        float delta = 0.0f;
         if(isend == 1){
         
             
