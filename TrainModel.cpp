@@ -136,10 +136,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     clReleaseMemObject(devWeight);
     clReleaseMemObject(devOutput);
     clReleaseKernel(kernel);
-
-
-
-
+    delete[] flatweights;
     
     return output;
 
@@ -232,8 +229,8 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     clReleaseMemObject(devBiasgradiant);
     clReleaseMemObject(devWeightGradiant);
     clReleaseKernel(kernel);
-
-
+    delete[] flatweights;
+    delete[] flatpreviousWeights;
 
     returns[0] = BiasGradiant;
     returns[1] = WeightGradiant;
@@ -386,10 +383,6 @@ int main(){
 
     //dort werden immer die zwischen loesungen gespeichert 
     float* uebergangsarray[modellength];
-    //test daten input
-    for(int i = 0; i < modellength; i++){
-        uebergangsarray[i] = new float[modelsize[i]];
-    }
     
 
     while(Loss > 0.08f){
@@ -455,6 +448,10 @@ int main(){
                 
                 returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i + 1], weights[i ], modelsize[i + 1],modelsize[i]);
             }
+
+            if(i != modellength - 1){
+                delete[] currentdelta;
+            }
             
 
             
@@ -479,6 +476,11 @@ int main(){
             delete[] returns[1];
             delete[] returns;
             
+        }
+
+        delete[] currentdelta;
+        for(int i = 1; i < modellength; i++){
+            delete[] uebergangsarray[i];
         }
         
     }   
