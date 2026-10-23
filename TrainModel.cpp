@@ -423,7 +423,7 @@ int main(){
         float* currentdelta;
         for(int i = modellength - 1; i > 0; i--){
             
-            
+            float* inputDelta;
             
             if(i == modellength - 1){
                 isend = 1;
@@ -436,15 +436,17 @@ int main(){
                         firstDelta[j] = 0.0f;
                     }
                 }
-                
+                inputDelta = firstDelta;
                 returns = train(isend,firstDelta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
                 
             }
             else{
                 isend = 0;
-                returns = train(isend,returns[2],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i - 1], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i], modelsize[i+1],modelsize[i]);
+                inputDelta = currentdelta;
+                
                 
             }
+            returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i+1], weights[i - 1], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i], modelsize[i+1],modelsize[i]);
 
             
             
