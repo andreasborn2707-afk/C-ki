@@ -464,7 +464,7 @@ int main(){
             for(int j = 0; j < modelsize[i + 1]; j++){
                 for(int k = 0; k < modelsize[i]; k++)
                 {
-                    weights[i][j][k] = weights[i][j][k] - (learngradient * returns[1][(j*modelsize[i]) + k]);
+                    weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * returns[1][(j*modelsize[i - 1]) + k]);
                 }
             }
 
@@ -472,7 +472,7 @@ int main(){
 
             delete[] returns[0];
             delete[] returns[1];
-            delete[] returns[2];
+            delete[] returns;
             
         }
         delete[] firstDelta;
