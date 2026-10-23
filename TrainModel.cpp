@@ -433,7 +433,7 @@ int main(){
             else{
                 isend = 0;
             }
-            BiasGradiant, WeightGradiant, Delta = train(isend,Delta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1]);
+            BiasGradiant, WeightGradiant, Delta = train(isend,Delta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],);
             
             
             //hier applien wir den gradient
