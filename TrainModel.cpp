@@ -49,7 +49,7 @@ __kernel void array_add(int isend, int previoussize, __global const float* previ
         else{
             for(int j = 0; j < previoussize; j++ )
             {
-                delta += PreviousWeights[(i * previoussize) + j] * previousDelta[j];
+                delta += PreviousWeights[(j * outputsize) + i] * previousDelta[j];
             }
             delta *= (Output[i] * (1.0f - Output[i]));
 
