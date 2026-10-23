@@ -25,7 +25,7 @@ __kernel void array_add(int biassize, int inputsize, __global const float* Bias,
 }
 )";
 const char* kernelBackpropagation = R
-__kernel void array_add(int isend, __global const float* previousDelta,__global const float* upcomingWeights, __gloabal const float* delta, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
+__kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __gloabal const float* delta, int biassize, int outputsize, __global const float* Bias, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
     
     int i = get_global_id(0);
     
@@ -48,7 +48,10 @@ __kernel void array_add(int isend, __global const float* previousDelta,__global 
             }
         }
         else{
-            
+            for(int i = 0; i < previoussize; i++ )
+            {
+                delta[i] += PreviousWeights[]
+            }
             delta[i] *= (Output[i] * (1.0f - Output[i]));
 
             
