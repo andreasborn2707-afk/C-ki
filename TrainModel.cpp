@@ -413,7 +413,7 @@ int main(){
         int isend;
         float** returns;
         float* BiasGradiants[modellength - 1];
-        float** weightgradiants[modellength - 1];
+        float* weightgradiants[modellength - 1];
         int outsize = modelsize[modellength - 1];
         float firstDelta[outsize];
         float* currentdelta;
@@ -458,7 +458,8 @@ int main(){
 
             
             
-            
+            BiasGradiants[i] = returns[0];
+            weightgradiants[i] = returns[1];
             //hier applien wir den gradient
             for(int j = 0; j < modelsize[i]; j++){
                 
