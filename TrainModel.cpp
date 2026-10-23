@@ -179,7 +179,7 @@ float* train(int isend, float previousDelta[],  int biaseLength, float output[],
     }
     for(int i = 0; i < previousBiasLength; i ++){
         for(int j = 0; j < previousInputLength; j++){
-            flatweights[(i * previousInputLength) + previousBiasLength] = previousWeights[i][j];
+            flatweights[(i * previousInputLength) + j] = previousWeights[i][j];
         }
     }
 
@@ -236,7 +236,7 @@ float* train(int isend, float previousDelta[],  int biaseLength, float output[],
 
 
     
-    return BiasGradiant, WeightGradiant, Delta;
+    return BiasGradiant WeightGradiant Delta;
 
 }
 
