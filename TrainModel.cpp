@@ -197,18 +197,15 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
     
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
     err = clSetKernelArg(kernel, 0, sizeof(int), &isend);
-    err = clSetKernelArg(kernel, 0, sizeof(int), &previousLength);
-    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devPreviousDelta);
+    err = clSetKernelArg(kernel, 1, sizeof(int), &previousLength);
+    err = clSetKernelArg(kernel, 2, sizeof(cl_mem), &devPreviousDelta);
     err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devpreviousWeight);
-    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devDelta);
-    err = clSetKernelArg(kernel, 0, sizeof(int), &TrueAnswer);
-    err = clSetKernelArg(kernel, 1, sizeof(int), &biaseLength);
-    err = clSetKernelArg(kernel, 2, sizeof(int), &outputsize);
-    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devbias);
-    err = clSetKernelArg(kernel, 4, sizeof(cl_mem), &devOutput);
-    err = clSetKernelArg(kernel, 5, sizeof(cl_mem), &devWeight);
-    err = clSetKernelArg(kernel, 6, sizeof(cl_mem), &devBiasgradiant);
-    err = clSetKernelArg(kernel, 7, sizeof(cl_mem), &devWeightGradiant);
+    err = clSetKernelArg(kernel, 4, sizeof(cl_mem), &devDelta);
+    err = clSetKernelArg(kernel, 5, sizeof(int), &outputsize);
+    err = clSetKernelArg(kernel, 6, sizeof(cl_mem), &devOutput);
+    err = clSetKernelArg(kernel, 7, sizeof(cl_mem), &devWeight);
+    err = clSetKernelArg(kernel, 8, sizeof(cl_mem), &devBiasgradiant);
+    err = clSetKernelArg(kernel, 9, sizeof(cl_mem), &devWeightGradiant);
     err = clSetKernelArg(kernel, 8, sizeof(cl_mem), &devInput);
     err = clSetKernelArg(kernel, 9, sizeof(int), &inputLength);
 
