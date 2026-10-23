@@ -48,10 +48,7 @@ __kernel void array_add(int isend, __global const float* previousDelta,__global 
             }
         }
         else{
-            for (int j = 0; j < inputsize; j++)
-            {
-                delta[i] += previousDelta[i] * Weights[(i * inputsize) + j];
-            }
+            
             delta[i] *= (Output[i] * (1.0f - Output[i]));
 
             
