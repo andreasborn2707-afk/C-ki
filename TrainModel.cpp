@@ -180,14 +180,14 @@ float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[]
     }
     for(int i = 0; i < previousBiasLength; i ++){
         for(int j = 0; j < previousInputLength; j++){
-            flatweights[(i * previousInputLength) + previousBiasLength]
+            flatweights[(i * previousInputLength) + previousBiasLength] = previousWeights[i][j];
         }
     }
 
     //gpu buffers erstellen fuer alle arrays
     cl_mem devPreviousDelta = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, previousDeltaBytes, previousDelta, &err);
-    cl_mem devpreviousWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, previousweightsBytes, p, &err);
-    cl_mem devbias = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, biasBytes, biase, &err);
+    cl_mem devpreviousWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, previousweightsBytes, flatpreviousWeights, &err);
+    cl_mem devDelta = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, DeltaByes, Delta, &err);
     cl_mem devInput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, inputBytes, input, &err);
     cl_mem devWeight = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, weightsbytes, flatweights, &err);
     cl_mem devOutput = clCreateBuffer(context, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, outputBytes, output, &err);
