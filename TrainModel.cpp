@@ -480,7 +480,7 @@ int main(){
     }   
     
     
-    json weightJson = json::array
+    json weightJson = json::array();
     for(int i = 0; i < modellength - 1; i++){
         json jsonLayer = json::array();
         for(int j = 0; j < modelsize[i+1]; j++){
@@ -490,7 +490,7 @@ int main(){
             }
             jsonLayer.push_back(jsonRow);
         }
-        weightsJson.push_back(jsonLayer);
+        weightJson.push_back(jsonLayer);
     }
 
     json biasesJson = json::array();
@@ -501,6 +501,18 @@ int main(){
         }
         biasesJson.push_back(row);
     }
+
+    std::fstream weightsFile;
+    weightsFile.open(R"(weights.json)",
+        std::ios::out);
+
+    std::fstream biaseFile;
+    biaseFile.open(R"(biase.json)",
+        std::ios::out);
+
+    
+    weightsFile << weightsJson.dump(4);
+    biaseFile << biasesJson.dump(4);
 
 
 
