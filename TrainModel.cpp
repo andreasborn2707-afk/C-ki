@@ -420,7 +420,8 @@ int main(){
         int isend;
         float** returns;
         float firstDelta[modelsize[modellength - 1]];
-        for(int i = modellength - 2; i > 0; i--){
+        float
+        for(int i = modellength - 1; i > 0; i--){
             
             
             
