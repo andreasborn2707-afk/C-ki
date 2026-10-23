@@ -422,6 +422,7 @@ int main(){
             int isend;
             float** returns;
             float firstDelta[10];
+            float* Delta;
             if(i == modellength - 1){
                 isend = 1;
                 for(int j = 0; j < modelsize[modellength - 1]; j++){
@@ -434,6 +435,7 @@ int main(){
                     }
                 }
                 returns = train(isend,firstDelta,modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i+1], modelsize[i+1],modelsize[i]);
+                Delta = returns[2]
             }
             else{
                 isend = 0;
