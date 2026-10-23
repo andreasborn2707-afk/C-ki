@@ -146,8 +146,9 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-float* train(int isend, float previousDelta[],  int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
+float** train(int isend, float previousDelta[],  int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
 {
+    float returns[3];
      cl_int err;
 
     
