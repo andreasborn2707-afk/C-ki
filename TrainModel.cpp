@@ -449,7 +449,10 @@ int main(){
             if(i < modellength - 1){
                 returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i], weights[i], modelsize[i+1],modelsize[i]);
             }
-            returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i], weights[i], modelsize[i+1],modelsize[i]);
+            else{
+                returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i], weights[i - 1], modelsize[i],modelsize[i]);
+            }
+            
 
             
             
@@ -464,6 +467,8 @@ int main(){
                     weights[i][j][k] = weights[i][j][k] - (learngradient * returns[1][(j*modelsize[i]) + k]);
                 }
             }
+
+            cureentDelta = returns[2]
             
         }
     }   
