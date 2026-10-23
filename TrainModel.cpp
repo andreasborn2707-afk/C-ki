@@ -24,7 +24,7 @@ __kernel void array_add(int biassize, int inputsize, __global const float* Bias,
     }
 }
 )";
-const char* kernelBackpropagation = R
+const char* kernelBackpropagation = R"(
 __kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __global  float* Delta,  int outputsize, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
     
     int i = get_global_id(0);
@@ -157,8 +157,9 @@ float* train(int TrueAnswer, float biase[], int biaseLength, float output[], int
     cl_kernel kernel = clCreateKernel(program1, "array_add", &err);
 
 
+    //_kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __global  float* Delta,  int outputsize, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
     
-    size_t biasBytes = sizeof(float) * biaseLength;
+    size_t 
     size_t inputBytes = sizeof(float) * inputLength;
     size_t outputBytes = sizeof(float) * outputsize;
     size_t weightsbytes = sizeof(float) * inputLength * biaseLength;
