@@ -412,6 +412,8 @@ int main(){
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         int isend;
         float** returns;
+        float* BiasGradiants[modellength - 1];
+        float** weightgradiants[modellength - 1];
         int outsize = modelsize[modellength - 1];
         float firstDelta[outsize];
         float* currentdelta;
