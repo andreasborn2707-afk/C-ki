@@ -156,12 +156,12 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     
 
     cl_kernel kernel = clCreateKernel(program1, "array_add", &err);
-    float* Delta = new float[previousLength];
+    float* Delta = new float[outputsize];
 
     
     size_t previousDeltaBytes = sizeof(float) * previousLength;
     size_t previousweightsBytes = sizeof(float) * previousBiasLength * previousInputLength;
-    size_t DeltaByes = sizeof(float) * previousLength;
+    size_t DeltaByes = sizeof(float) * outputsize;
     size_t inputBytes = sizeof(float) * inputLength;
     size_t outputBytes = sizeof(float) * outputsize;
     size_t weightsbytes = sizeof(float) * inputLength * biaseLength;
@@ -169,7 +169,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     size_t WeightGradiantBytes = sizeof(float) * inputLength * biaseLength;
 
     float* BiasGradiant = new float[biaseLength];
-    float* WeightGradiant = new float[outputsize * biaseLength];
+    float* WeightGradiant = new float[inputLength * biaseLength];
     //2d weights auf 1d flatten
     float* flatweights = new float[biaseLength * inputLength];
     float* flatpreviousWeights = new float[previousBiasLength * previousInputLength];
