@@ -198,7 +198,9 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
     err = clSetKernelArg(kernel, 0, sizeof(int), &isend);
     err = clSetKernelArg(kernel, 0, sizeof(int), &previousLength);
-    
+    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devPreviousDelta);
+    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devpreviousWeight);
+    err = clSetKernelArg(kernel, 3, sizeof(cl_mem), &devDelta);
     err = clSetKernelArg(kernel, 0, sizeof(int), &TrueAnswer);
     err = clSetKernelArg(kernel, 1, sizeof(int), &biaseLength);
     err = clSetKernelArg(kernel, 2, sizeof(int), &outputsize);
