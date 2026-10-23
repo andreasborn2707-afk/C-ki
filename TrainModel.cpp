@@ -146,7 +146,7 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     
 }
 
-float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
+float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
 {
      cl_int err;
 
@@ -157,7 +157,6 @@ float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[]
     cl_kernel kernel = clCreateKernel(program1, "array_add", &err);
 
 
-    //_kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __global  float* Delta,  int outputsize, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
     
     size_t previousDeltaBytes = sizeof(float) * previousLength;
     size_t previousweightsBytes = sizeof(float) * previousBiasLength * previousInputLength;
@@ -194,7 +193,12 @@ float* train(float previousDelta[], float Delta[], int TrueAnswer, float biase[]
     cl_mem devBiasgradiant = clCreateBuffer(context, CL_MEM_WRITE_ONLY , BiasGradiantBytes, NULL, &err);
     cl_mem devWeightGradiant = clCreateBuffer(context, CL_MEM_WRITE_ONLY , WeightGradiantBytes, NULL, &err);
     
+    //_kernel void array_add(int isend, int previoussize, __global const float* previousDelta,__global const float* PreviousWeights, __global  float* Delta,  int outputsize, __global const float* Output, __global const float* Weights, __global float* BiasGradient, __global float* weightGradient, __global float* inputs,  int  inputsize){
+    
     // jetzt tun wir sozusagen die inputs uebergeben also wieder wichtig ist die riehenfolge
+    err = clSetKernelArg(kernel, 0, sizeof(int), &isend);
+    err = clSetKernelArg(kernel, 0, sizeof(int), &previousLength);
+    
     err = clSetKernelArg(kernel, 0, sizeof(int), &TrueAnswer);
     err = clSetKernelArg(kernel, 1, sizeof(int), &biaseLength);
     err = clSetKernelArg(kernel, 2, sizeof(int), &outputsize);
