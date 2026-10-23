@@ -422,7 +422,7 @@ int main(){
                 isend = 1;
                 for(int j = 0; j < modelsize[modellength]; j++){
                     if(j == answer){
-                        Delta[i] = answer;
+                        Delta[i] = 1;
                         
                     }
                     else{
