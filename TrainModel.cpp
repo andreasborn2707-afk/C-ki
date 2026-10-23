@@ -420,7 +420,14 @@ int main(){
             float* Delta;
             if(i == modellength - 1){
                 isend = 1;
-                for(int j = 0; j < modelsize[modellength - 1])
+                for(int j = 0; j < modelsize[modellength]; j++){
+                    if(j == answer){
+                        Delta += answer;
+                    }
+                    else{
+                        Delta 
+                    }
+                }
             }
             else{
                 isend = 0;
