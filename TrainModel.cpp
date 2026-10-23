@@ -222,7 +222,9 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
     err = clEnqueueReadBuffer(queue, devWeightGradiant, CL_TRUE, 0, DeltaByes, Delta, 0, NULL, NULL);
     //jetzt noch hinter uns aufrauemen
 
-    clReleaseMemObject(devbias);
+    clReleaseMemObject(devDelta);
+    clReleaseMemObject(devPreviousDelta);
+    clReleaseMemObject(devpreviousWeight)
     clReleaseMemObject(devInput);
     clReleaseMemObject(devWeight);
     clReleaseMemObject(devOutput);
@@ -234,7 +236,7 @@ float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, fl
 
 
     
-    return BiasGradiant, WeightGradiant;
+    return BiasGradiant, WeightGradiant, Delta;
 
 }
 
