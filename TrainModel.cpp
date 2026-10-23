@@ -446,7 +446,7 @@ int main(){
                 
                 
             }
-            returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i+1], weights[i - 1], modelsize[i], uebergangsarray[i], modelsize[i + 1], weights[i], modelsize[i+1],modelsize[i]);
+            returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i], weights[i], modelsize[i+1],modelsize[i]);
 
             
             
