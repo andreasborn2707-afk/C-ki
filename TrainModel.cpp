@@ -423,16 +423,17 @@ int main(){
                 for(int j = 0; j < modelsize[modellength]; j++){
                     if(j == answer){
                         Delta += answer;
+                        
                     }
                     else{
-                        Delta 
+                        Delta += 0;
                     }
                 }
             }
             else{
                 isend = 0;
             }
-            BiasGradiant, WeightGradiant = train(isend,biase[i],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i]);
+            BiasGradiant, WeightGradiant, Delta = train(isend,biase[i],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i]);
             
             
             //hier applien wir den gradient
