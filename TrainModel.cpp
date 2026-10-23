@@ -416,7 +416,13 @@ int main(){
         //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
         for(int i = modellength - 1; i > 0; i--){
             //float* train(int isend, float previousDelta[], float Delta[], int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[], int previousLength, float** previousWeights, int previousBiasLength, int previousInputLength)
-            
+            int isend;
+            if(i == modellength - 1){
+                isend = 1;
+            }
+            else{
+                
+            }
             BiasGradiant, WeightGradiant = train(answer,biase[i],modelsize[i +1], uebergangsarray[i + 1], modelsize[i+1], weights[i], modelsize[i], uebergangsarray[i]);
             
             
