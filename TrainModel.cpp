@@ -424,7 +424,7 @@ int main(){
             float firstDelta[10];
             if(i == modellength - 1){
                 isend = 1;
-                for(int j = 0; j < modelsize[modellength]; j++){
+                for(int j = 0; j < modelsize[modellength - 1]; j++){
                     if(j == answer){
                         firstDelta[j] = 1.0f;
                         
