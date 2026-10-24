@@ -415,8 +415,8 @@ int main(){
                 float difference = uebergangsarray[modellength - 1][i] - target;
                 UebergangsLoss += 0.5f * difference * difference;
             }
-            UebergangsLoss += Loss;
-            std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
+            Loss += UebergangsLoss;
+            std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << UebergangsLoss << std::endl;
             //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
             int isend;
             float** returns;
