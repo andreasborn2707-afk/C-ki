@@ -418,9 +418,9 @@ int main(){
                 
                 
             for(int i = 0; i < modelsize[0]; i++){
-                dataset[i] = trainJson[distrib(gen)]["image"][i].get<int>() / 255.0f;
+                dataset[i] = trainJson[o]["image"][i].get<int>() / 255.0f;
             }
-            answer = trainJson[distrib(gen)]["label"];
+            answer = trainJson[o]["label"];
                 
             uebergangsarray[0] = dataset;
                 
