@@ -385,7 +385,7 @@ int main(){
     float* uebergangsarray[modellength];
     
 
-    for(int u = 0; u < 2; u++){
+    for(int u = 0; u < 4; u++){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
