@@ -111,6 +111,7 @@ int main(){
 
     
     std::uniform_int_distribution<int> distrib(0, 10000 - 1);
+    int test = distrib(gen);
 
     //zuerst lesen wir die model groese aus
     std::ifstream file ("modelsize.json");
@@ -193,11 +194,10 @@ int main(){
     datasetfile >> datasetJson;
     
     float dataset[modelsize[0]];
-    int sampleIndex = distrib(gen);
-    int answer = datasetJson[sampleIndex]["label"];
+    int answer = datasetJson[distrib(gen)]["label"];
     for(int i = 0; i < modelsize[0]; i++)
     {
-        dataset[i] = datasetJson[sampleIndex]["image"][i].get<float>() / 255.0f;
+        dataset[i] = datasetJson[distrib(gen)]["image"][i].get<float>();
     }
     std::cout << answer << std::endl;
 
@@ -254,14 +254,9 @@ int main(){
     for(int i = 0; i < modellength - 1; i++){
         uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
     }
-    int prediction = 0;
     for(int i = 0; i < modelsize[modellength - 1]; i++){
         std::cout << i << " wahrscheinlichkeit:" << uebergangsarray[modellength - 1][i] << ", ";
-        if(uebergangsarray[modellength - 1][i] > uebergangsarray[modellength - 1][prediction]){
-            prediction = i;
-        }
     }
-    std::cout << "\nVorhersage: " << prediction << ", richtig: " << answer << std::endl;
    
 
     clReleaseCommandQueue(queue);
