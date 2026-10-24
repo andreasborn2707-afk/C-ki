@@ -246,7 +246,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
 
 int main(){
     //einer unserer wichtigsten variablen der loss
-    float Loss = 0.0f;
+    float Loss = 0.8f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
     float learngradient = 0.001f;
 
