@@ -376,24 +376,8 @@ int main(){
     queue = clCreateCommandQueueWithProperties(context, device.get(), 0, &err);
     program = clCreateProgramWithSource(context, 1, &kernelSource, NULL, &err);
     program1 = clCreateProgramWithSource(context, 1, &kernelBackpropagation, NULL, &err);
-    err = clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
-    if(err != CL_SUCCESS){
-        size_t logSize = 0;
-        clGetProgramBuildInfo(program, raw_device, CL_PROGRAM_BUILD_LOG, 0, NULL, &logSize);
-        std::vector<char> buildLog(logSize);
-        clGetProgramBuildInfo(program, raw_device, CL_PROGRAM_BUILD_LOG, logSize, buildLog.data(), NULL);
-        std::cerr << "OpenCL Forward-Kernel konnte nicht gebaut werden:\n" << buildLog.data() << std::endl;
-        return 1;
-    }
-    err = clBuildProgram(program1, 0, NULL, NULL, NULL, NULL);
-    if(err != CL_SUCCESS){
-        size_t logSize = 0;
-        clGetProgramBuildInfo(program1, raw_device, CL_PROGRAM_BUILD_LOG, 0, NULL, &logSize);
-        std::vector<char> buildLog(logSize);
-        clGetProgramBuildInfo(program1, raw_device, CL_PROGRAM_BUILD_LOG, logSize, buildLog.data(), NULL);
-        std::cerr << "OpenCL Backpropagation-Kernel konnte nicht gebaut werden:\n" << buildLog.data() << std::endl;
-        return 1;
-    }
+    clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
+    clBuildProgram(program1, 0, NULL, NULL, NULL, NULL);
     //vertig initiallieisert 
 
 
