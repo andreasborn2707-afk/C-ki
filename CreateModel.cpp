@@ -26,7 +26,7 @@ int main(){
     std::random_device rd;
     std::mt19937 gen(rd());
     //bereich festlegen welchen die weights und biases haben sollte es ist eigentlich ziemlich egal sollte halt nur nicht minus sein
-    std::uniform_real_distribution<float> dis(0.0f, 0.1f);
+    std::uniform_real_distribution<float> dis(0.0f, 0.001f);
 
 
     // die oberste array schicht soll so lange sein wie es schichten gibt 
@@ -65,7 +65,7 @@ int main(){
     //und jetzt geben wir den biasen noch einen random wert
     for(int i = 0; i <modellength - 1; i++){
         for(int j = 0; j < modelsize[i +1]; j++){
-            biases[i][j] = dis(gen);
+            biases[i][j] = 0.0f;
         }
     }
     

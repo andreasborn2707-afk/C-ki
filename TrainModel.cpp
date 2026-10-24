@@ -246,7 +246,7 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
 
 int main(){
     //einer unserer wichtigsten variablen der loss
-    float Loss = 1.0f;
+    float Loss = 0.0f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
     float learngradient = 0.01f;
 
@@ -408,12 +408,13 @@ int main(){
             }
             
             float modelanswer = uebergangsarray[modellength - 1][answer];
-            Loss = 0.0f;
+            float UebergangsLoss = 0.0f;
             for (int i = 0; i < modelsize[modellength - 1]; i++) {
                 float target = (i == answer) ? 1.0f : 0.0f;
                 float difference = uebergangsarray[modellength - 1][i] - target;
-                Loss += 0.5f * difference * difference;
+                UebergangsLoss += 0.5f * difference * difference;
             }
+            UebergangsLoss += Loss;
             std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
             //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
             int isend;
@@ -497,6 +498,7 @@ int main(){
                 delete[] uebergangsarray[i];
             }
         }
+        
         
     }   
     
