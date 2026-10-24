@@ -193,10 +193,11 @@ int main(){
     datasetfile >> datasetJson;
     
     float dataset[modelsize[0]];
-    int answer = datasetJson[distrib(gen)]["label"];
+    int sampleIndex = distrib(gen);
+    int answer = datasetJson[sampleIndex]["label"];
     for(int i = 0; i < modelsize[0]; i++)
     {
-        dataset[i] = datasetJson[distrib(gen)]["image"][i].get<float>();
+        dataset[i] = datasetJson[sampleIndex]["image"][i].get<float>() / 255.0f;
     }
     std::cout << answer << std::endl;
 
@@ -253,9 +254,14 @@ int main(){
     for(int i = 0; i < modellength - 1; i++){
         uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
     }
+    int prediction = 0;
     for(int i = 0; i < modelsize[modellength - 1]; i++){
         std::cout << i << " wahrscheinlichkeit:" << uebergangsarray[modellength - 1][i] << ", ";
+        if(uebergangsarray[modellength - 1][i] > uebergangsarray[modellength - 1][prediction]){
+            prediction = i;
+        }
     }
+    std::cout << "\nVorhersage: " << prediction << ", richtig: " << answer << std::endl;
    
 
     clReleaseCommandQueue(queue);
