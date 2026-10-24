@@ -497,6 +497,7 @@ int main(){
                     
                     
             }
+            std::cout << "/rTraining:" << o << ""
 
             //hier applien wir den gradient
             for(int i = modellength - 1; i > 0; i--){
