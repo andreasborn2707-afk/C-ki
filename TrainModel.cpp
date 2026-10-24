@@ -385,7 +385,7 @@ int main(){
     float* uebergangsarray[modellength];
     
 
-    for(int u = 0; u < 4; u++){
+    for(int u = 0; u < 1; u++){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
@@ -498,7 +498,7 @@ int main(){
                 for(int i = 1; i < modellength; i++){
                     delete[] uebergangsarray[i];
                 }
-        }
+            }
         }
         Loss = Loss / 60000.0f;
         std::cout << "\n \n \n \n epochen Loss:" << Loss << std::endl;
