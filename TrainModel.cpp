@@ -405,69 +405,69 @@ int main(){
             for(int i = 0; i < modellength - 1; i++){
                 uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
             }
-                for(int i = 0; i < modelsize[modellength - 1]; i++){
-                    std::cout << uebergangsarray[modellength - 1][i] << ' ';
-                }
+            for(int i = 0; i < modelsize[modellength - 1]; i++){
+                std::cout << uebergangsarray[modellength - 1][i] << ' ';
+            }
                 
-                float modelanswer = uebergangsarray[modellength - 1][answer];
-                float UebergangsLoss = 0.0f;
-                for (int i = 0; i < modelsize[modellength - 1]; i++) {
-                    float target = (i == answer) ? 1.0f : 0.0f;
-                    float difference = uebergangsarray[modellength - 1][i] - target;
-                    UebergangsLoss += 0.5f * difference * difference;
-                }
-                Loss += UebergangsLoss;
-                std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << UebergangsLoss << std::endl;
-                //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
-                int isend;
-                float** returns;
+            float modelanswer = uebergangsarray[modellength - 1][answer];
+            float UebergangsLoss = 0.0f;
+            for (int i = 0; i < modelsize[modellength - 1]; i++) {
+                float target = (i == answer) ? 1.0f : 0.0f;
+                float difference = uebergangsarray[modellength - 1][i] - target;
+                UebergangsLoss += 0.5f * difference * difference;
+            }
+            Loss += UebergangsLoss;
+            std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << UebergangsLoss << std::endl;
+            //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
+            int isend;
+            float** returns;
                 
-                int outsize = modelsize[modellength - 1];
-                float firstDelta[outsize];
-                float* currentdelta;
-                for(int i = modellength - 1; i > 0; i--){
+            int outsize = modelsize[modellength - 1];
+            float firstDelta[outsize];
+            float* currentdelta;
+            for(int i = modellength - 1; i > 0; i--){
                     
-                    float* inputDelta;
+                float* inputDelta;
                     
-                    if(i == modellength - 1){
-                        isend = 1;
-                        for(int j = 0; j < modelsize[modellength - 1]; j++){
-                            if(j == answer){
-                                firstDelta[j] = 1.0f;
+                if(i == modellength - 1){
+                    isend = 1;
+                    for(int j = 0; j < modelsize[modellength - 1]; j++){
+                        if(j == answer){
+                            firstDelta[j] = 1.0f;
                                 
-                            }
-                            else{
-                                firstDelta[j] = 0.0f;
-                            }
                         }
-                        inputDelta = firstDelta;
-                        
-                        
+                        else{
+                            firstDelta[j] = 0.0f;
+                        }
                     }
-                    else{
-                        isend = 0;
-                        inputDelta = currentdelta;
+                    inputDelta = firstDelta;
                         
                         
-                    }
-                    if(i == modellength - 1){
+                }
+                else{
+                    isend = 0;
+                    inputDelta = currentdelta;
                         
-                        returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i], weights[i - 1], modelsize[i],modelsize[i - 1]);
-                    }
-                    else{
                         
-                        returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i + 1], weights[i ], modelsize[i + 1],modelsize[i]);
-                    }
+                }
+                if(i == modellength - 1){
+                        
+                    returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i], weights[i - 1], modelsize[i],modelsize[i - 1]);
+                }
+                else{
+                        
+                    returns = train(isend,inputDelta,modelsize[i], uebergangsarray[i], modelsize[i], weights[i - 1], modelsize[i - 1], uebergangsarray[i - 1], modelsize[i + 1], weights[i ], modelsize[i + 1],modelsize[i]);
+                }
 
-                    if(i != modellength - 1){
-                        delete[] currentdelta;
-                    }
+                if(i != modellength - 1){
+                    delete[] currentdelta;
+                }
                     
 
                     
                     
-                    BiasGradiants[i - 1] = returns[0];
-                    weightgradiants[i - 1] = returns[1];
+                BiasGradiants[i - 1] = returns[0];
+                weightgradiants[i - 1] = returns[1];
                     
 
                     currentdelta = returns[2];
