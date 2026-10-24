@@ -193,10 +193,10 @@ int main(){
     datasetfile >> datasetJson;
     
     float dataset[modelsize[0]];
-    int answer = datasetJson[0]["label"];
+    int answer = datasetJson[distrib(gen)]["label"];
     for(int i = 0; i < modelsize[0]; i++)
     {
-        dataset[i] = datasetJson[0]["image"][i].get<float>();
+        dataset[i] = datasetJson[distrib(gen)]["image"][i].get<float>();
     }
     std::cout << answer << std::endl;
 
