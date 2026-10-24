@@ -497,7 +497,7 @@ int main(){
                     
                     
             }
-            std::cout << "\rTraining:" << o / 600.0f << "%" << std::flush;
+            std::cout << "\r Epoch: {} Training:" << o / 600.0f << "%" << std::flush;
 
             //hier applien wir den gradient
             for(int i = modellength - 1; i > 0; i--){
