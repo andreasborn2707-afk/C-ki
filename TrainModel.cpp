@@ -418,9 +418,9 @@ int main(){
                 
                 
             for(int i = 0; i < modelsize[0]; i++){
-                dataset[i] = trainJson[0]["image"][i].get<int>() / 255.0f;
+                dataset[i] = trainJson[distrib(gen)]["image"][i].get<int>() / 255.0f;
             }
-            answer = trainJson[o]["label"];
+            answer = trainJson[distrib(gen)]["label"];
                 
             uebergangsarray[0] = dataset;
                 
@@ -431,7 +431,7 @@ int main(){
             }
             
                 
-            float modelanswer = uebergangsarray[modellength - 1][answer];
+            
             float UebergangsLoss = 0.0f;
             for (int i = 0; i < modelsize[modellength - 1]; i++) {
                 float target = (i == answer) ? 1.0f : 0.0f;
