@@ -386,7 +386,6 @@ int main(){
     
 
     for(int u = 0; u < 2; u++){
-        double epochLoss = 0.0;
         for(int o = 0; o < 60000; o++){
             //zuerst bestimmen wir welche trainings date wir holen 
             
@@ -408,13 +407,14 @@ int main(){
                 std::cout << uebergangsarray[modellength - 1][i] << ' ';
             }
             
+            float modelanswer = uebergangsarray[modellength - 1][answer];
             Loss = 0.0f;
             for (int i = 0; i < modelsize[modellength - 1]; i++) {
                 float target = (i == answer) ? 1.0f : 0.0f;
                 float difference = uebergangsarray[modellength - 1][i] - target;
                 Loss += 0.5f * difference * difference;
             }
-            epochLoss += Loss;
+            std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << Loss << std::endl;
             //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
             int isend;
             float** returns;
@@ -469,7 +469,6 @@ int main(){
                 
 
                 currentdelta = returns[2];
-                delete[] returns;
 
                 
                 
@@ -488,17 +487,16 @@ int main(){
                     }
                 }
             }
-            for(int i = 0; i < modellength - 1; i++){
-                delete[] BiasGradiants[i];
-                delete[] weightgradiants[i];
-            }
+            delete[] returns[0];
+            delete[] returns[1];
+            delete[] returns;
+
+
             delete[] currentdelta;
             for(int i = 1; i < modellength; i++){
                 delete[] uebergangsarray[i];
             }
         }
-        std::cout << "Epoche " << (u + 1) << ", durchschnittlicher Loss: "
-                  << epochLoss / 60000.0 << std::endl;
         
     }   
     
