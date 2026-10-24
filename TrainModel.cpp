@@ -248,7 +248,7 @@ int main(){
     //einer unserer wichtigsten variablen der loss
     float Loss = 0.0f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
-    float learngradient = 0.00000001f;
+    float learngradient = 0.01f;
 
     
     std::random_device rd;
@@ -376,8 +376,24 @@ int main(){
     queue = clCreateCommandQueueWithProperties(context, device.get(), 0, &err);
     program = clCreateProgramWithSource(context, 1, &kernelSource, NULL, &err);
     program1 = clCreateProgramWithSource(context, 1, &kernelBackpropagation, NULL, &err);
-    clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
-    clBuildProgram(program1, 0, NULL, NULL, NULL, NULL);
+    err = clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
+    if(err != CL_SUCCESS){
+        size_t logSize = 0;
+        clGetProgramBuildInfo(program, raw_device, CL_PROGRAM_BUILD_LOG, 0, NULL, &logSize);
+        std::vector<char> buildLog(logSize);
+        clGetProgramBuildInfo(program, raw_device, CL_PROGRAM_BUILD_LOG, logSize, buildLog.data(), NULL);
+        std::cerr << "OpenCL Forward-Kernel konnte nicht gebaut werden:\n" << buildLog.data() << std::endl;
+        return 1;
+    }
+    err = clBuildProgram(program1, 0, NULL, NULL, NULL, NULL);
+    if(err != CL_SUCCESS){
+        size_t logSize = 0;
+        clGetProgramBuildInfo(program1, raw_device, CL_PROGRAM_BUILD_LOG, 0, NULL, &logSize);
+        std::vector<char> buildLog(logSize);
+        clGetProgramBuildInfo(program1, raw_device, CL_PROGRAM_BUILD_LOG, logSize, buildLog.data(), NULL);
+        std::cerr << "OpenCL Backpropagation-Kernel konnte nicht gebaut werden:\n" << buildLog.data() << std::endl;
+        return 1;
+    }
     //vertig initiallieisert 
 
 
