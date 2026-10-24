@@ -389,7 +389,7 @@ int main(){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
-            if(Loss / o >= 0.00f){
+            if(Loss / o >= 0.08f){
                 //zuerst bestimmen wir welche trainings date wir holen 
                 
                 
