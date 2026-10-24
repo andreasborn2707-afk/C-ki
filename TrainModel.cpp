@@ -389,22 +389,22 @@ int main(){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
-            if(Loss / o >= 0.08f){
-                //zuerst bestimmen wir welche trainings date wir holen 
+           
+            //zuerst bestimmen wir welche trainings date wir holen 
                 
                 
-                for(int i = 0; i < modelsize[0]; i++){
-                    dataset[i] = trainJson[o]["image"][i].get<int>() / 255.0f;
-                }
-                answer = trainJson[o]["label"];
+            for(int i = 0; i < modelsize[0]; i++){
+                dataset[i] = trainJson[o]["image"][i].get<int>() / 255.0f;
+            }
+            answer = trainJson[o]["label"];
                 
-                uebergangsarray[0] = dataset;
+            uebergangsarray[0] = dataset;
                 
 
                 
-                for(int i = 0; i < modellength - 1; i++){
-                    uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
-                }
+            for(int i = 0; i < modellength - 1; i++){
+                uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
+            }
                 for(int i = 0; i < modelsize[modellength - 1]; i++){
                     std::cout << uebergangsarray[modellength - 1][i] << ' ';
                 }
