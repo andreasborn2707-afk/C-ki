@@ -497,7 +497,7 @@ int main(){
                     
                     
             }
-            std::cout << "/rTraining:" << o << "%" << std::flush;
+            std::cout << "\rTraining: [" << o << "%" << std::flush;
 
             //hier applien wir den gradient
             for(int i = modellength - 1; i > 0; i--){
