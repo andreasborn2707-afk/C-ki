@@ -74,6 +74,20 @@ cl_command_queue queue;
 cl_program program;
 cl_program program1;
 
+bool buildOpenCLProgram(cl_program openclProgram, cl_device_id device, const char* name){
+    cl_int err = clBuildProgram(openclProgram, 1, &device, NULL, NULL, NULL);
+    if(err == CL_SUCCESS){
+        return true;
+    }
+
+    size_t logSize = 0;
+    clGetProgramBuildInfo(openclProgram, device, CL_PROGRAM_BUILD_LOG, 0, NULL, &logSize);
+    std::vector<char> buildLog(logSize);
+    clGetProgramBuildInfo(openclProgram, device, CL_PROGRAM_BUILD_LOG, logSize, buildLog.data(), NULL);
+    std::cerr << name << " Build fehlgeschlagen (OpenCL-Fehler " << err << "):\n" << buildLog.data() << std::endl;
+    return false;
+}
+
 float* Forward(float biase[], int biaseLength,int inputLength, float input[], float** weights){
 
     
@@ -123,6 +137,10 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
     //sagt basicly wie biele thrats gebraucht werden bei uns ist es 1 pro neuron
     size_t globalWorkSize = biaseLength;
     err = clEnqueueNDRangeKernel(queue, kernel, 1, NULL, &globalWorkSize, NULL, 0, NULL, NULL);
+    if(err != CL_SUCCESS){
+        std::cerr << "Forward-Kernel konnte nicht gestartet werden (OpenCL-Fehler " << err << ")" << std::endl;
+        std::exit(1);
+    }
 
     clFinish(queue);
 
@@ -211,6 +229,10 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
     //sagt basicly wie biele thrats gebraucht werden bei uns ist es 1 pro neuron
     size_t globalWorkSize = outputsize;
     err = clEnqueueNDRangeKernel(queue, kernel, 1, NULL, &globalWorkSize, NULL, 0, NULL, NULL);
+    if(err != CL_SUCCESS){
+        std::cerr << "Backpropagation-Kernel konnte nicht gestartet werden (OpenCL-Fehler " << err << ")" << std::endl;
+        std::exit(1);
+    }
 
     clFinish(queue);
 
@@ -376,8 +398,10 @@ int main(){
     queue = clCreateCommandQueueWithProperties(context, device.get(), 0, &err);
     program = clCreateProgramWithSource(context, 1, &kernelSource, NULL, &err);
     program1 = clCreateProgramWithSource(context, 1, &kernelBackpropagation, NULL, &err);
-    clBuildProgram(program, 0, NULL, NULL, NULL, NULL);
-    clBuildProgram(program1, 0, NULL, NULL, NULL, NULL);
+    if(!buildOpenCLProgram(program, raw_device, "Forward-Kernel") ||
+       !buildOpenCLProgram(program1, raw_device, "Backpropagation-Kernel")){
+        return 1;
+    }
     //vertig initiallieisert 
 
 
