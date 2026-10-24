@@ -105,6 +105,13 @@ float* Forward(float biase[], int biaseLength,int inputLength, float input[], fl
 
 
 int main(){
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    
+    std::uniform_int_distribution<int> distrib(0, 10000 - 1);
+
     //zuerst lesen wir die model groese aus
     std::ifstream file ("modelsize.json");
     if(!file.is_open()){
