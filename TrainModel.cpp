@@ -386,11 +386,12 @@ int main(){
     
 
     for(int u = 0; u < 2; u++){
+        float* BiasGradiant;
+        float* WeightGradiant;
         for(int o = 0; o < 60000; o++){
             //zuerst bestimmen wir welche trainings date wir holen 
             
-            float* BiasGradiant;
-            float* WeightGradiant;
+            
             for(int i = 0; i < modelsize[0]; i++){
                 dataset[i] = trainJson[o]["image"][i].get<int>() / 255.0f;
             }
