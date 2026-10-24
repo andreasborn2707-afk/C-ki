@@ -385,10 +385,10 @@ int main(){
     float* uebergangsarray[modellength];
     
 
-    for(int u = 0; u < 1; u++){
+    for(int u = 0; u < 2; u++){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
-        for(int o = 0; o < 30000; o++){
+        for(int o = 0; o < 60000; o++){
             if(Loss / o >= 0.08){
                 //zuerst bestimmen wir welche trainings date wir holen 
                 
@@ -500,7 +500,7 @@ int main(){
                 }
             }
             else{
-                 json weightJson = json::array();
+                json weightJson = json::array();
                 for(int i = 0; i < modellength - 1; i++){
                     json jsonLayer = json::array();
                     for(int j = 0; j < modelsize[i+1]; j++){
@@ -513,34 +513,34 @@ int main(){
                     weightJson.push_back(jsonLayer);
                 }
 
-    json biasesJson = json::array();
-    for(int i = 0; i <modellength - 1; i++){
-        json row = json::array();
-        for(int j = 0; j < modelsize[i +1]; j++){
-            row.push_back(biase[i][j]);
-        }
-        biasesJson.push_back(row);
-    }
+                json biasesJson = json::array();
+                for(int i = 0; i <modellength - 1; i++){
+                    json row = json::array();
+                    for(int j = 0; j < modelsize[i +1]; j++){
+                        row.push_back(biase[i][j]);
+                    }
+                    biasesJson.push_back(row);
+                }
 
-    std::fstream weightsFile;
-    weightsFile.open(R"(weights.json)",
-        std::ios::out);
+                std::fstream weightsFile;
+                weightsFile.open(R"(weights.json)",
+                    std::ios::out);
 
-    std::fstream biaseFile;
-    biaseFile.open(R"(biase.json)",
-        std::ios::out);
+                std::fstream biaseFile;
+                biaseFile.open(R"(biase.json)",
+                    std::ios::out);
 
-    
-    weightsFile << weightJson.dump(4);
-    biaseFile << biasesJson.dump(4);
+                
+                weightsFile << weightJson.dump(4);
+                biaseFile << biasesJson.dump(4);
 
 
 
-    clReleaseCommandQueue(queue);
-    clReleaseContext(context);
-    clReleaseProgram(program);
-    clReleaseProgram(program1);
-    return 0;
+                clReleaseCommandQueue(queue);
+                clReleaseContext(context);
+                clReleaseProgram(program);
+                clReleaseProgram(program1);
+                return 0;
             }
         }
         Loss = Loss / 60000.0f;
