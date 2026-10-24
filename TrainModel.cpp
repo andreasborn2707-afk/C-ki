@@ -409,7 +409,7 @@ int main(){
     float* uebergangsarray[modellength];
     
 
-    for(int u = 0; u < 4; u++){
+    for(int u = 0; u < 7; u++){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
@@ -441,7 +441,7 @@ int main(){
                 UebergangsLoss += 0.5f * difference * difference;
             }
             Loss += UebergangsLoss;
-            std::cout << "modelanswere: " << modelanswer << ", was es haben sollte answer:" << answer << ", loss:" << UebergangsLoss << std::endl;
+            
             //int TrueAnswer, float biase[], int biaseLength, float output[], int outputsize,float** weights,  int inputLength, float input[]
             int isend;
             float** returns;
