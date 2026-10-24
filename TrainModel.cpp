@@ -409,7 +409,7 @@ int main(){
     float* uebergangsarray[modellength];
     
 
-    for(int u = 0; u < 7; u++){
+    for(int u = 0; u < 5; u++){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
@@ -429,9 +429,7 @@ int main(){
             for(int i = 0; i < modellength - 1; i++){
                 uebergangsarray[i + 1] = Forward(biase[i], modelsize[i+ 1], modelsize[i], uebergangsarray[i], weights[i]);
             }
-            for(int i = 0; i < modelsize[modellength - 1]; i++){
-                std::cout << uebergangsarray[modellength - 1][i] << ' ';
-            }
+            
                 
             float modelanswer = uebergangsarray[modellength - 1][answer];
             float UebergangsLoss = 0.0f;
