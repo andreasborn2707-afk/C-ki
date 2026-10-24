@@ -246,9 +246,9 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
 
 int main(){
     //einer unserer wichtigsten variablen der loss
-    float Loss = 0.8f;
+    float Loss = 0.0f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
-    float learngradient = 0.0001f;
+    float learngradient = 0.001f;
 
     
     std::random_device rd;
@@ -389,7 +389,7 @@ int main(){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
-            if(Loss / o >= 0.08f){
+            if(Loss / o >= 0.00f){
                 //zuerst bestimmen wir welche trainings date wir holen 
                 
                 
