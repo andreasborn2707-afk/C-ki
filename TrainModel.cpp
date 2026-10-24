@@ -498,7 +498,7 @@ int main(){
                 delete[] uebergangsarray[i];
             }
         }
-        
+        Loss = Loss / 60000;
         
     }   
     
