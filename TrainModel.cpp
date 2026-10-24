@@ -499,6 +499,7 @@ int main(){
             }
         }
         Loss = Loss / 60000.0f;
+        std::cout << "\n \n \n \n epochen Loss:" << Loss << std::endl;
         
     }   
     
