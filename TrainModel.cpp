@@ -499,7 +499,7 @@ int main(){
                     
                     
             }
-            std::cout << "\r Epoch: {" << u <<"} " << "Training:" << o / 600.0f << "%" << std::flush;
+            std::cout << "\r Epoch: {" << u <<"} " << "Training:" << (o + 1) / 600.0f << "%" << std::flush;
 
             //hier applien wir den gradient
             for(int i = modellength - 1; i > 0; i--){
@@ -527,7 +527,7 @@ int main(){
             
         }
         Loss = Loss / 60000.0f;
-        std::cout << " epochen Loss:" << Loss << std::endl;
+        std::cout << "\n epochen Loss:" << Loss << std::endl;
         Loss = 0.00f;
         
     }   
