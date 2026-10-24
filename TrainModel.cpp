@@ -267,6 +267,8 @@ float** train(int isend, float previousDelta[],  int biaseLength, float output[]
 
 
 int main(){
+
+    std::cout << "initializing everything"
     //einer unserer wichtigsten variablen der loss
     float Loss = 0.0f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
