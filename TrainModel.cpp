@@ -270,7 +270,7 @@ int main(){
     //einer unserer wichtigsten variablen der loss
     float Loss = 0.0f;
     //hier den lerngradient er dar fnicht zu hoch zu sein aber auch nicht zu fein
-    float learngradient = 0.007f;
+    float learngradient = 0.01f;
 
     
     std::random_device rd;
@@ -409,7 +409,7 @@ int main(){
     float* uebergangsarray[modellength];
     
 
-    for(int u = 0; u < 3; u++){
+    for(int u = 0; u < 2; u++){
         float* BiasGradiants[modellength - 1];
         float* weightgradiants[modellength - 1];
         for(int o = 0; o < 60000; o++){
@@ -524,7 +524,7 @@ int main(){
             
         }
         Loss = Loss / 60000.0f;
-        std::cout << "\n \n \n \n epochen Loss:" << Loss << std::endl;
+        std::cout << " epochen Loss:" << Loss << std::endl;
         Loss = 0.00f;
         
     }   
