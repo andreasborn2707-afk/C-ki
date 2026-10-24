@@ -470,82 +470,40 @@ int main(){
                 weightgradiants[i - 1] = returns[1];
                     
 
-                    currentdelta = returns[2];
+                currentdelta = returns[2];
 
                     
                     
-                }
+            }
 
-                //hier applien wir den gradient
-                for(int i = modellength - 1; i > 0; i--){
-                    for(int j = 0; j < modelsize[i]; j++){
+            //hier applien wir den gradient
+            for(int i = modellength - 1; i > 0; i--){
+                for(int j = 0; j < modelsize[i]; j++){
                             
-                        biase[i - 1][j] = biase[i- 1][j] - (learngradient * BiasGradiants[i - 1][j]);
-                    }
-                    for(int j = 0; j < modelsize[i]; j++){
-                        for(int k = 0; k < modelsize[i - 1]; k++){
+                    biase[i - 1][j] = biase[i- 1][j] - (learngradient * BiasGradiants[i - 1][j]);
+                }
+                for(int j = 0; j < modelsize[i]; j++){
+                    for(int k = 0; k < modelsize[i - 1]; k++){
                                 
-                            weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * weightgradiants[i - 1][(j*modelsize[i - 1]) + k]);
-                        }
+                        weights[i - 1][j][k] = weights[i - 1][j][k] - (learngradient * weightgradiants[i - 1][(j*modelsize[i - 1]) + k]);
                     }
-                }
-                delete[] returns[0];
-                delete[] returns[1];
-                delete[] returns;
-
-
-                delete[] currentdelta;
-                for(int i = 1; i < modellength; i++){
-                    delete[] uebergangsarray[i];
                 }
             }
-            else{
-                json weightJson = json::array();
-                for(int i = 0; i < modellength - 1; i++){
-                    json jsonLayer = json::array();
-                    for(int j = 0; j < modelsize[i+1]; j++){
-                        json jsonRow = json::array();
-                        for(int k = 0; k < modelsize[i]; k++){
-                            jsonRow.push_back(weights[i][j][k]);
-                        }
-                        jsonLayer.push_back(jsonRow);
-                    }
-                    weightJson.push_back(jsonLayer);
-                }
-
-                json biasesJson = json::array();
-                for(int i = 0; i <modellength - 1; i++){
-                    json row = json::array();
-                    for(int j = 0; j < modelsize[i +1]; j++){
-                        row.push_back(biase[i][j]);
-                    }
-                    biasesJson.push_back(row);
-                }
-
-                std::fstream weightsFile;
-                weightsFile.open(R"(weights.json)",
-                    std::ios::out);
-
-                std::fstream biaseFile;
-                biaseFile.open(R"(biase.json)",
-                    std::ios::out);
-
-                
-                weightsFile << weightJson.dump(4);
-                biaseFile << biasesJson.dump(4);
+            delete[] returns[0];
+            delete[] returns[1];
+            delete[] returns;
 
 
-
-                clReleaseCommandQueue(queue);
-                clReleaseContext(context);
-                clReleaseProgram(program);
-                clReleaseProgram(program1);
-                return 0;
+            delete[] currentdelta;
+            for(int i = 1; i < modellength; i++){
+                delete[] uebergangsarray[i];
             }
+            
+            
         }
         Loss = Loss / 60000.0f;
         std::cout << "\n \n \n \n epochen Loss:" << Loss << std::endl;
-        Loss = 0.08f;
+        Loss = 0.00f;
         
     }   
     
